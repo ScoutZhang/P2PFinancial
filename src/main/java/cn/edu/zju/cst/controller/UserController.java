@@ -16,7 +16,7 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    @RequestMapping("/detail")
+    @RequestMapping("/test")
     public ModelAndView getDetail(){
         ModelAndView mav = new ModelAndView("test");
         User user = userService.getUserById(1);

@@ -17,7 +17,14 @@ public class UserServiceTest extends SpringTestCase{
 
     @Test
     public void testGetUserById(){
-        User user = userService.getUserById(1);
+        //测试id值为2的用户的信息是否可以完整读取到
+
+        User user = userService.getUserById(2);
+        if(user.getUserPhone()==null){
+            logger.debug("userPhone为null");
+        }else if(user.getUserPhone().equals("")){
+            logger.debug("userPhone为空字符串");
+        }
         //控制台输出结果
         logger.debug("查找结果："+user);
     }

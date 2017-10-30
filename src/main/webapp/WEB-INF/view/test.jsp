@@ -15,8 +15,9 @@
     ${user.id}<br>
     ${user.userAccount}<br>
     ${user.userPassword}<br>
+    ${user.userIdentity}<br>
     ${user.userPhone}<br>
-    ${user.userId}<br>
     ${user.userEmail}<br>
+    ${user.userType}<br>
  </body>
 </html>
