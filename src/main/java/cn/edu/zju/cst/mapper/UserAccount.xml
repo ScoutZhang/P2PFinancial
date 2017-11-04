@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.zju.cst.dao.IUserAccountDao">
+    <!-- 数据库中表user_account与Domain类UserAccount的映射 -->
+    <resultMap id="userAccountResultMap" type="cn.edu.zju.cst.domain.UserAccount">
+        <id column="u_a_id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="account_balance" property="accountBalance"/>
+        <result column="bank_card" property="bankCard"/>
+        <result column="accrued_interest" property="accruedInterest"/>
+    </resultMap>
+
+    <select id="selectUserAccountById" parameterType="int" resultMap="userAccountResultMap">
+        SELECT * FROM user_account WHERE u_a_id = #{id}
+    </select>
+
+    <select id="selectUserAccountByUserId" parameterType="int" resultMap="userAccountResultMap">
+        SELECT * FROM user_account WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateAccountBalanceByUserId">
+        UPDATE user_account SET account_balance = #{1} WHERE user_id = #{0}
+    </update>
+
+    <update id="updateAccruedInterestByUserId">
+        UPDATE user_account SET accrued_interest = #{1} WHERE user_id = #{0}
+    </update>
+
+    <insert id="insertUserAccount" parameterType="cn.edu.zju.cst.domain.UserAccount">
+        INSERT INTO user_account (user_id, account_balance, bank_card, accrued_interest)
+        VALUES (#{userId}, #{accountBalance}, #{bankCard}, #{accruedInterest})
+    </insert>
+</mapper>

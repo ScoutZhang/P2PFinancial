@@ -12,8 +12,20 @@
         <result column="user_type" property="userType"/>
     </resultMap>
 
-    <!-- 通过id查询单条记录 -->
     <select id="selectUserById" parameterType="int" resultMap="userResultMap">
         SELECT * FROM user WHERE user_id = #{id}
     </select>
+
+    <select id="selectUserByAccountAndPassword" resultMap="userResultMap">
+        SELECT * FROM user WHERE user_account = #{0} AND user_password = #{1}
+    </select>
+
+    <select id="selectUserByAccount" parameterType="java.lang.String" resultMap="userResultMap">
+        SELECT * FROM user WHERE user_account = #{userAccount}
+    </select>
+
+    <insert id="insertUser" parameterType="cn.edu.zju.cst.domain.User">
+        INSERT INTO user (user_account, user_password, user_identity, user_phone, user_email, user_type)
+        VALUES (#{userAccount}, #{userPassword}, #{userIdentity}, #{userPhone}, #{userEmail}, #{userType})
+    </insert>
 </mapper> 

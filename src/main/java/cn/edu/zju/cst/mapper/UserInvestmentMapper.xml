@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.zju.cst.dao.IUserInvestmentDao">
+    <!-- 数据库中表user_investment与Domain类UserInvestment的映射 -->
+    <resultMap id="userInvestmentResultMap" type="cn.edu.zju.cst.domain.UserInvestment">
+        <id column="u_i_id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="investment_id" property="investmentId"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="lock_principal" property="lockPrincipal"/>
+        <result column="lock_interest" property="lockInterest"/>
+        <result column="principal" property="principal"/>
+        <result column="interest" property="interest"/>
+    </resultMap>
+
+    <select id="selectUserInvestmentById" parameterType="int" resultMap="userInvestmentResultMap">
+        SELECT * FROM user_investment WHERE u_i_id = #{id}
+    </select>
+
+    <select id="selectUserInvestmentsByUserId" parameterType="int" resultMap="userInvestmentResultMap">
+        SELECT * FROM user_investment WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insertUserInvestment" parameterType="cn.edu.zju.cst.domain.UserInvestment">
+        INSERT INTO user_investment (user_id, investment_id, start_time, end_time, lock_principal, lock_interest, principal, interest)
+        VALUES (#{userId}, #{investmentId}, #{startTime}, #{endTime}, #{lockPrincipal}, #{lockInterest}, #{principal}, #{interest})
+    </insert>
+
+    <delete id="deleteUserInvestmentById" parameterType="int">
+        DELETE FROM user_investment WHERE u_i_id = #{id}
+    </delete>
+
+    <update id="updatePrincipalAndInterestById">
+        UPDATE user_investment SET lock_principal = #{1}, lock_interest = #{2}, principal = #{3}, interest = #{4}, WHERE u_i_id = #{0}
+    </update>
+
+    <select id="selectAllUserInvestments" resultMap="userInvestmentResultMap">
+        SELECT * FROM user_investment
+    </select>
+</mapper>
