@@ -80,4 +80,32 @@ public class User {
                 ", userType='" + userType + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (userAccount != null ? !userAccount.equals(user.userAccount) : user.userAccount != null) return false;
+        if (userPassword != null ? !userPassword.equals(user.userPassword) : user.userPassword != null) return false;
+        if (userIdentity != null ? !userIdentity.equals(user.userIdentity) : user.userIdentity != null) return false;
+        if (userPhone != null ? !userPhone.equals(user.userPhone) : user.userPhone != null) return false;
+        if (userEmail != null ? !userEmail.equals(user.userEmail) : user.userEmail != null) return false;
+        return userType != null ? userType.equals(user.userType) : user.userType == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (userAccount != null ? userAccount.hashCode() : 0);
+        result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
+        result = 31 * result + (userIdentity != null ? userIdentity.hashCode() : 0);
+        result = 31 * result + (userPhone != null ? userPhone.hashCode() : 0);
+        result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        return result;
+    }
 }
