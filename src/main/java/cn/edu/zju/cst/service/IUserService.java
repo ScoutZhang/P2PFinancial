@@ -22,7 +22,7 @@ public interface IUserService {
     //返回参数：User类实例
     User getUserByAccount(String userAccount);
 
-    //保存一条新增的用户信息
+    //保存一条新增的用户信息，同时创建了用户账户
     //传入参数：User类实例
     //返回参数：操作结果状态
     int setUser(User user);

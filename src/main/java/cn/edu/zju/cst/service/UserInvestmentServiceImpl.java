@@ -158,7 +158,7 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
                 //该投资项目还未开始计息，
                 continue;
             }else if(date.after(endTime)){
-                //该投资项目已经结束
+                //该投资项目已经结束，不再处理
                 continue;
             }else{
                 int investmentId = userInvestment.getInvestmentId();
@@ -170,14 +170,16 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
                 //判断是否符合 一次性还本付息（rdm）
                 if("rdm".equals(investmentRepayment)){
                     //判断是否符合 每日还本付息 投资项目
+                    //每日还本付息第一次计算和后续计算使用的计算字段不同。目前只按第一次计算实现
                     if("daily".equals(interestExpiryDate)&&"t".equals(investmentCompound)){
                         double x = 1 + annualInterestRate/365;
                         double y = TimeUnit.MILLISECONDS.toDays(date.getTime()-startTime.getTime())+1;
-                        double principal = userInvestment.getPrincipal();
-                        double interest = Math.pow(x,y)*principal;
+                        double principal = userInvestment.getLockPrincipal();
+                        double interest = Math.pow(x,y)*principal-principal;
                         userInvestmentDao.updatePrincipalAndInterestById(userInvestment.getId(),0,0,principal,interest);
                     }else if("monthly".equals(interestExpiryDate)&&"f".equals(investmentCompound)){
                         //符合 一次性还本付息 投资项目
+                        //如果输入参数正好是最后的投资期限，应当将lockPrincipal和lockInterest一对一转到principal和interest。测试时暂不处理
                         int n = calculateReturnMoneyTime(startTime,investment.getInvestmentHorizon()/30, date);
                         double lockInterest = userInvestment.getLockPrincipal()*annualInterestRate/12*n;
                         userInvestmentDao.updatePrincipalAndInterestById(userInvestment.getId(),userInvestment.getLockPrincipal(),lockInterest,0,0);

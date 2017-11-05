@@ -32,7 +32,7 @@
     </delete>
 
     <update id="updatePrincipalAndInterestById">
-        UPDATE user_investment SET lock_principal = #{1}, lock_interest = #{2}, principal = #{3}, interest = #{4}, WHERE u_i_id = #{0}
+        UPDATE user_investment SET lock_principal = #{1}, lock_interest = #{2}, principal = #{3}, interest = #{4} WHERE u_i_id = #{0}
     </update>
 
     <select id="selectAllUserInvestments" resultMap="userInvestmentResultMap">

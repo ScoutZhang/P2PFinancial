@@ -33,7 +33,7 @@ public class InvestmentServiceImpl implements IInvestmentService {
         //余额宝平均年收益率
         double yuebaoInterestRate = 0.0389;
 
-        //计算银行活期储蓄和余额宝收益
+        //计算银行活期储蓄和余额宝收益（余额宝年收益率已经包含了复利计算，不需要再算复利）
         interestResultDTO.setDepositBankInterest(principal*bankInterestRate/365*investmentHorizon);
         interestResultDTO.setYuebaoInterest(principal*yuebaoInterestRate/365*investmentHorizon);
 
@@ -43,7 +43,8 @@ public class InvestmentServiceImpl implements IInvestmentService {
             if("daily".equals(interestExpiryDate)&&"t".equals(investmentCompound)){
                 double x = 1 + annualInterestRate/365;
                 double y = investmentHorizon;
-                double totalInterest = Math.pow(x,y)*principal;
+                double totalMoney = Math.pow(x,y)*principal;
+                double totalInterest = totalMoney-principal;
                 interestResultDTO.setTotalInterest(totalInterest);
                 interestResultDTO.setAverageInterest(totalInterest/investmentHorizon);
                 return interestResultDTO;
@@ -169,7 +170,12 @@ public class InvestmentServiceImpl implements IInvestmentService {
         //计算每月回款本金、每月回款利息以及每月回款总额
         for(int n=1;n<=numOfMonth;++n){
             //每月回款本金
-            double part1 = 0;
+            double part1;
+            if(n==numOfMonth){
+                part1 = principal;
+            }else{
+                part1 = 0;
+            }
             returnPrincipal.add(part1);
             //每月回款利息
             double part2 = principal*monthlyInterestRate;
