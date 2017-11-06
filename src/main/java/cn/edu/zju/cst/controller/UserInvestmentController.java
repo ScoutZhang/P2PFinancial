@@ -71,7 +71,7 @@ public class UserInvestmentController {
         double Benefits = 0.0;
         //User user = (User) request.getSession().getAttribute("user");
         for(UserInvestment userInvestment : getIvestedProject(request)){
-            Benefits += userInvestment.getInterest();
+            Benefits += userInvestment.getInterest() * userInvestment.getPrincipal();
         }
         return Benefits;
     }
