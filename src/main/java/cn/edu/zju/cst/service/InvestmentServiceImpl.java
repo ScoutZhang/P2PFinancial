@@ -1,5 +1,4 @@
 package cn.edu.zju.cst.service;
-
 import cn.edu.zju.cst.dao.IInvestmentDao;
 import cn.edu.zju.cst.domain.Investment;
 import cn.edu.zju.cst.dto.InterestResultDTO;
@@ -8,23 +7,19 @@ import cn.edu.zju.cst.dto.InvestmentOverviewDTO;
 import cn.edu.zju.cst.dto.RegularResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 /**
  * Created by DEAN on 2017/10/31.
  */
 @Service("investmentService")
 public class InvestmentServiceImpl implements IInvestmentService {
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
     @Autowired
     private IInvestmentDao investmentDao;
-
     @Override
     public InterestResultDTO calculateInterest(double principal, double annualInterestRate, int investmentHorizon, String investmentRepayment, String interestExpiryDate, String investmentCompound) {
         InterestResultDTO interestResultDTO = new InterestResultDTO();
@@ -32,11 +27,9 @@ public class InvestmentServiceImpl implements IInvestmentService {
         double bankInterestRate = 0.0035;
         //余额宝平均年收益率
         double yuebaoInterestRate = 0.0389;
-
         //计算银行活期储蓄和余额宝收益（余额宝年收益率已经包含了复利计算，不需要再算复利）
         interestResultDTO.setDepositBankInterest(principal*bankInterestRate/365*investmentHorizon);
         interestResultDTO.setYuebaoInterest(principal*yuebaoInterestRate/365*investmentHorizon);
-
         //判断是否符合 一次性还本付息（rdm）
         if("rdm".equals(investmentRepayment)){
             //判断是否符合 每日还本付息 投资项目
@@ -91,7 +84,6 @@ public class InvestmentServiceImpl implements IInvestmentService {
         //以上均不符合，没有对应的项目收益计算
         return null;
     }
-
     @Override
     public RegularResultDTO calculateAcpim(double principal, double annualInterestRate, int investmentHorizon) {
         //等额本息投资详情
@@ -128,7 +120,6 @@ public class InvestmentServiceImpl implements IInvestmentService {
         regularResultDTO.setReturnMoney(returnMoney);
         return regularResultDTO;
     }
-
     @Override
     public RegularResultDTO calculateAcm(double principal, double annualInterestRate, int investmentHorizon) {
         //等额本金投资详情
@@ -156,7 +147,6 @@ public class InvestmentServiceImpl implements IInvestmentService {
         regularResultDTO.setReturnMoney(returnMoney);
         return regularResultDTO;
     }
-
     @Override
     public RegularResultDTO calculateMpmd(double principal, double annualInterestRate, int investmentHorizon) {
         //按月付息到期付本
@@ -189,7 +179,6 @@ public class InvestmentServiceImpl implements IInvestmentService {
         regularResultDTO.setReturnMoney(returnMoney);
         return regularResultDTO;
     }
-
     //计算预计每月回款时间
     private List<String> calculateReturnMoneyTime(int numOfMonth){
         List<String> returnMoneyTime = new ArrayList<>();
@@ -203,7 +192,6 @@ public class InvestmentServiceImpl implements IInvestmentService {
         }
         return returnMoneyTime;
     }
-
     @Override
     public InvestmentOverviewDTO getInvestmentOverview(String investmentRepayment) {
         InvestmentOverviewDTO investmentOverviewDTO = new InvestmentOverviewDTO();
@@ -224,7 +212,6 @@ public class InvestmentServiceImpl implements IInvestmentService {
         investmentOverviewDTO.setInvestmentHorizon(investmentHorizon);
         return investmentOverviewDTO;
     }
-
     @Override
     public InvestmentDetailDTO getInvestmentDetail(String investmentRepayment, int investmentHorizon) {
         InvestmentDetailDTO investmentDetailDTO = new InvestmentDetailDTO();
@@ -260,4 +247,11 @@ public class InvestmentServiceImpl implements IInvestmentService {
         investmentDetailDTO.setNumberOfPeopleAdded(investment.getNumberOfPeopleAdded());
         return investmentDetailDTO;
     }
+
+    @Override
+    public Investment getInvestmentById(int id) {
+        return investmentDao.selectInvestmentById(id);
+    }
+
+
 }
