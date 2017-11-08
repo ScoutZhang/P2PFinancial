@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>首页</title>
+    <title>一次性返还本息</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -61,8 +61,132 @@
         </div><!-- /.container-fluid -->
     </nav>
 </div>
-
-</body>
+<div class="parallax-pro">
+    <div class="img-src" style="background-image: url('/static/img/invest_1.png');"></div>
+    <div class="container">
+        <div class="space-100"></div>
+        <div class="space-100"></div>
+        <div class="space-100"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-user">
+                <div class="text-center">
+                    <h4>
+                        <a><small><i class="fa fa-clock-o" style="margin-right: 2px"></i>1个月</small></a>
+                    </h4>
+                    <hr>
+                    <div class="text-center">
+                        <p class="h1" style="color: #ec971f;">6.0%</p><h5><small>预期年化利率</small></h5>
+                    </div>
+                    <div class="space-30"></div>
+                    <hr>
+                    <div class="actions">
+                        <a class="btn btn-lg btn-warning btn-fill" href="/jsp/detail.jsp">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-user">
+                <div class="text-center">
+                    <h4>
+                        <a><small><i class="fa fa-clock-o" style="margin-right: 2px"></i>3个月</small></a>
+                    </h4>
+                    <hr>
+                    <div class="text-center">
+                        <p class="h1" style="color: #ec971f;">6.5%</p><h5><small>预期年化利率</small></h5>
+                    </div>
+                    <div class="space-30"></div>
+                    <hr>
+                    <div class="actions">
+                        <a class="btn btn-lg btn-warning btn-fill" href="/jsp/detail.jsp">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-user">
+                <div class="text-center">
+                    <h4>
+                        <a><small><i class="fa fa-clock-o" style="margin-right: 2px"></i>6个月</small></a>
+                    </h4>
+                    <hr>
+                    <div class="text-center">
+                        <p class="h1" style="color: #ec971f;">7.2%</p><h5><small>预期年化利率</small></h5>
+                    </div>
+                    <div class="space-30"></div>
+                    <hr>
+                    <div class="actions">
+                        <a class="btn btn-lg btn-warning btn-fill" href="/jsp/detail.jsp">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-user">
+                <div class="text-center">
+                    <h4>
+                        <a><small><i class="fa fa-clock-o" style="margin-right: 2px"></i>12个月</small></a>
+                    </h4>
+                    <hr>
+                    <div class="text-center">
+                        <p class="h1" style="color: #ec971f;">8.8%</p><h5><small>预期年化利率</small></h5>
+                    </div>
+                    <div class="space-30"></div>
+                    <hr>
+                    <div class="actions">
+                        <a class="btn btn-lg btn-warning btn-fill" href="/jsp/detail.jsp">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <div class="tim-title" style="margin-left: 5%;">
+        <h3>收益计算器</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="tab-pane active" id="calculator" style="margin-left: 7%;margin-right: 5%;">
+                <form>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input id="principal" type="text" value="" placeholder="请输入您的本金" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="rate" type="text" value="" placeholder="请输入您的年利率" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="term" type="text" value="" placeholder="请输入您的投资期限" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-left" style="margin-top: 3%;">
+                                <button type="submit" class="btn btn-block btn-lg btn-round btn-warning">计算</button>
+                            </div>
+                            <br>
+                            <div class="text-left">
+                                <button type="reset" class="btn btn-block btn-lg btn-round btn-warning">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center">
+                <p style="color: #ec971f;font-size: 600%;">0000.00</p>
+            </div>
+        </div>
+    </div>
+    <div class="space-30"></div>
+</div>
 
 <script src="/static/jquery/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="/static/assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>

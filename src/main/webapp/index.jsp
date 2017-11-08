@@ -51,7 +51,7 @@
                     <li><a href="/jsp/invest_2.jsp">每日返还本息</a></li>
                     <li><a href="/jsp/invest_3.jsp">等额本金</a></li>
                     <li><a href="/jsp/invest_4.jsp">等额本息</a></li>
-                    <li><a href="/jsp/invest_5.jsp">按月付息</a></li>
+                    <li><a href="/jsp/user.jsp">按月付息</a></li>
                 </ul>
 
                 <div class="text-right" style="margin-top: 1%;margin-right: 5%;">
