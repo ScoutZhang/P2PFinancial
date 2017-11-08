@@ -7095,4 +7095,10 @@ td.visible-print {
   td.hidden-print {
     display: none !important;
   }
+
+  .x-sidebar-lest{
+    float: left;
+    padding-right: 15px;
+    border-right: 1px solid #dddddd;
+  }
 }
