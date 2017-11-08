@@ -73,8 +73,8 @@
                         <h4 class="title">@用户名<br></h4>
                     </div>
                     <br>
-                    <p class="description text-left" style="margin-left: 15%;">
-                        身份证号：430408XXXXXXXXXXXX<br>
+                    <p class="description text-left" style="margin-left: 5%;font-size: 100%;">
+                        身份证号：43040800000000000X<br>
                         个人电话：176XXXX0716<br>
                         个人邮箱：vivian59@qq.com
                     </p>
@@ -82,14 +82,14 @@
             </div>
         </div>
         <div class="col-md-1">
-            <div class="text-center" style="float:left;width: 1px;height: 300px; background: #dbdbdb;"></div>
+            <div class="text-center" style="float:left;width: 1px;height: 320px; background: #dbdbdb;"></div>
         </div>
         <div class="col-md-3">
             <div class="text-center" style="margin-top: 10%;margin-right: 20%;">
                 <h5><small>账户余额</small></h5><p class="h1" style="color: #ec971f;">680.3<a class="h5">&emsp;元</a></p>
             </div>
             <br><br>
-            <div class="row" style="margin-right: 20%">
+            <div class="row" style="margin-right: 10%">
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-block btn-lg btn-fill btn-round btn-warning">充值</button>
                 </div>
@@ -99,10 +99,10 @@
             </div>
         </div>
         <div class="col-md-1">
-            <div class="text-center" style="float:left;width: 1px;height: 300px; background: #dbdbdb;"></div>
+            <div class="text-center" style="float:left;width: 1px;height: 320px; background: #dbdbdb;"></div>
         </div>
         <div class="col-md-4">
-            <div style="margin-right: 25%;margin-top: 3%;">
+            <div style="margin-right: 20%;margin-top: 3%;">
                 <div class="text-center">
                     <h5><small>累计获得收益</small></h5><p class="h1" style="color: #ec971f;">680.3<a class="h5">&emsp;元</a></p>
                 </div>
@@ -110,12 +110,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-center">
-                            <h5><small>目前在投金额</small></h5><p class="h1" style="color: #ec971f;">680.3<a class="h5">&emsp;元</a></p>
+                            <h5><small>目前在投金额</small></h5><p class="h2" style="color: #ec971f;">680.3<a class="h5">&emsp;元</a></p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="text-center">
-                            <h5><small>目前可提金额</small></h5><p class="h1" style="color: #ec971f;">00.00<a class="h5">&emsp;元</a></p>
+                            <h5><small>目前可提金额</small></h5><p class="h2" style="color: #ec971f;">00.00<a class="h5">&emsp;元</a></p>
                         </div>
                     </div>
                 </div>
