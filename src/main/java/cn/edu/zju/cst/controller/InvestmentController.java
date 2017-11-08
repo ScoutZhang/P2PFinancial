@@ -4,6 +4,7 @@ import cn.edu.zju.cst.domain.Investment;
 import cn.edu.zju.cst.dto.InterestResultDTO;
 import cn.edu.zju.cst.dto.InvestmentDetailDTO;
 import cn.edu.zju.cst.dto.InvestmentOverviewDTO;
+import cn.edu.zju.cst.dto.RegularResultDTO;
 import cn.edu.zju.cst.service.IInvestmentService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,14 +51,21 @@ public class InvestmentController {
      * @param
      * @return
      */
-    public InvestmentDetailDTO getProjectCategory(String projectcategory,String investmentRepayment,
+    public InvestmentDetailDTO getProjectDetail(String investmentRepayment,
                                          int investmentHorizon){
         InvestmentDetailDTO investmentDetailDTO = investmentService.getInvestmentDetail(investmentRepayment,investmentHorizon);
 
-        mav.addObject("InvestmentDetial", investmentDetailDTO);
+        mav.addObject("InvestmentDetail", investmentDetailDTO);
         return investmentDetailDTO;
     }
 
+    public RegularResultDTO getRegularResult(String investmentRepayment,double principal, double annualInterestRate, int investmentHorizon){
+        if(investmentRepayment.equals("acpim")) return investmentService.calculateAcpim(principal,annualInterestRate,investmentHorizon);
+        else if(investmentRepayment.equals("acm")) return investmentService.calculateAcm(principal,annualInterestRate,investmentHorizon);
+        else if(investmentRepayment.equals("mpmd")) return investmentService.calculateMpmd(principal,annualInterestRate,investmentHorizon);
+        //else if(investmentRepayment.equals("acpim")) return investmentService.calculateAcpim(principal,annualInterestRate,investmentHorizon);
+        return  null;
+    }
 
 
 

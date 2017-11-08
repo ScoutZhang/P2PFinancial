@@ -3,6 +3,7 @@ package cn.edu.zju.cst.controller;
 import cn.edu.zju.cst.domain.Investment;
 import cn.edu.zju.cst.domain.User;
 import cn.edu.zju.cst.domain.UserInvestment;
+import cn.edu.zju.cst.dto.UserAccountDTO;
 import cn.edu.zju.cst.service.IUserInvestmentService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +49,7 @@ public class UserInvestmentController {
      */
     @RequestMapping("/getInvestedProject")
     @ResponseBody
-    public List<UserInvestment> getIvestedProject(HttpServletRequest request){
+    public List<UserInvestment> getInvestedProject(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         return iUserInvestmentService.getUserInvestments(user.getId());
     }
@@ -67,13 +68,10 @@ public class UserInvestmentController {
      */
     @RequestMapping("/getUserBenefits")
     @ResponseBody
-    public double getUserBenefits(HttpServletRequest request){
+    public UserAccountDTO getUserBenefits(HttpServletRequest request){
         double Benefits = 0.0;
-        //User user = (User) request.getSession().getAttribute("user");
-        for(UserInvestment userInvestment : getIvestedProject(request)){
-            Benefits += userInvestment.getInterest() * userInvestment.getPrincipal();
-        }
-        return Benefits;
+        User user = (User) request.getSession().getAttribute("user");
+        return iUserInvestmentService.getUserAccount(user.getId());
     }
 
 
