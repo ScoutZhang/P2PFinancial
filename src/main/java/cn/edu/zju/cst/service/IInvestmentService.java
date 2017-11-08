@@ -1,5 +1,6 @@
 package cn.edu.zju.cst.service;
 
+import cn.edu.zju.cst.domain.Investment;
 import cn.edu.zju.cst.dto.InvestmentDetailDTO;
 import cn.edu.zju.cst.dto.InvestmentOverviewDTO;
 import cn.edu.zju.cst.dto.RegularResultDTO;
@@ -37,4 +38,6 @@ public interface IInvestmentService {
     //返回具体投资项目的详情
     //传入参数：还款方式（acpim、acm、mpmd、rdm四种）、投资期限
     InvestmentDetailDTO getInvestmentDetail(String investmentRepayment, int investmentHorizon);
+
+    Investment getInvestmentById(int id);
 }

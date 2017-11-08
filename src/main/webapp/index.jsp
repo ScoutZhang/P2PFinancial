@@ -79,7 +79,7 @@
                 <img src="/static/img/index_2.jpg" alt="Awesome Image">
             </div>
             <div class="item">
-                <img src="/static/img/index_3.jpg" alt="Awesome Image">
+                <img src="/static/img/index_3.png" alt="Awesome Image">
             </div>
         </div>
 
@@ -95,49 +95,8 @@
 <div class="space-30"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-4 col-sm-10">
-                    <div class="text-right">
-                        <img src="static/img/col_1.png" alt="Rounded Image" class="img-rounded img-responsive" style="margin-top: 25%;">
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-12">
-                    <h2 class="text-center">银行存管
-                    </h2>
-                    <hr>
-                    <p class="text-muted">交易资金通过银行流转<br>避免挪用资金、卷款跑路</p>            </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-4 col-sm-10">
-                    <div class="text-right">
-                        <img src="/static/img/col_2.png" alt="Rounded Image" class="img-rounded img-responsive" style="margin-top: 25%;">
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-12">
-                    <h2 class="text-center">利益保障
-                    </h2>
-                    <hr>
-                    <p class="text-muted">借款人资质经三重审核<br>用户利益保障机制，保证金超6.26亿</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-4 col-sm-10">
-                    <div class="text-right">
-                        <img src="/static/img/col_3.png" alt="Rounded Image" class="img-rounded img-responsive" style="margin-top: 25%;">
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-12">
-                    <h2 class="text-center">利益保障
-                    </h2>
-                    <hr>
-                    <p class="text-muted">累计投资人总数550,278<br>90天以上累计逾期率仅0.17%</p>
-                </div>
-            </div>
+        <div class="col-md-12">
+            <img src="static/img/insurance.PNG" style="margin-top:10px;">
         </div>
     </div>
 </div>

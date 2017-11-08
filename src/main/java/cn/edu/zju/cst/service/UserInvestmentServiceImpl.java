@@ -1,5 +1,4 @@
 package cn.edu.zju.cst.service;
-
 import cn.edu.zju.cst.dao.*;
 import cn.edu.zju.cst.domain.Investment;
 import cn.edu.zju.cst.domain.UserAccount;
@@ -7,7 +6,6 @@ import cn.edu.zju.cst.domain.UserInvestment;
 import cn.edu.zju.cst.dto.UserAccountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,21 +13,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 /**
  * Created by DEAN on 2017/11/1.
  */
 @Service("userInvestmentService")
 public class UserInvestmentServiceImpl implements IUserInvestmentService {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
     @Autowired
     IInvestmentDao investmentDao;
     @Autowired
     IUserInvestmentDao userInvestmentDao;
     @Autowired
     IUserAccountDao userAccountDao;
-
     @Override
     public String setUserInvestment(int userId, int investmentId, double principal) {
         //判断投资是否符合最低起购金额、最大购买额度
@@ -80,14 +75,12 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
         userInvestmentDao.insertUserInvestment(userInvestment);
         return "投资成功，将从次日起开始计息";
     }
-
     @Override
     public List<UserInvestment> getUserInvestments(int userId) {
         List<UserInvestment> userInvestmentList;
         userInvestmentList = userInvestmentDao.selectUserInvestmentsByUserId(userId);
         return userInvestmentList;
     }
-
     @Override
     public String extractMoneyToAccount(int userInvestmentId) {
         UserInvestment userInvestment = userInvestmentDao.selectUserInvestmentById(userInvestmentId);
@@ -114,7 +107,6 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
             }
         }
     }
-
     @Override
     public UserAccountDTO getUserAccount(int userId) {
         UserAccountDTO userAccountDTO = new UserAccountDTO();
@@ -144,7 +136,6 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
         userAccountDTO.setMoney(money);
         return userAccountDTO;
     }
-
     @Override
     public String testDayByDay(Date date) throws ParseException{
         //注意：每次测试前都要初始化数据库中数据，该测试会一次性计算从项目开始时间到输入的测试时间之间的本息情况
@@ -234,7 +225,6 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
         }
         return "测试运行完毕，已对user_investment表更新";
     }
-
     //计算预计每月回款时间，并判断当前测试的日期处于哪个阶段
     private int calculateReturnMoneyTime(Date startTime, int numOfMonth, Date testDate){
         int n = 0;
