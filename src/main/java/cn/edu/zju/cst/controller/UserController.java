@@ -4,11 +4,10 @@ import cn.edu.zju.cst.domain.User;
 import cn.edu.zju.cst.service.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -19,86 +18,60 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-
-
-    @RequestMapping("/goToSignUp")
-    public String goSignUp() {
-        return "signup";
-    }
-    /**
-     * 注册用户
-     *
-     * @param user,session
-     * @return
-     */
-    @RequestMapping("/signUp")
-    @ResponseBody
-    public boolean signUp(User user, HttpSession session) {
-        if(userService.setUser(user) == 0){
-            session.setAttribute("user",user);
-            return true;
-        }
-        return false;
-    }
-
-
-
-
-    @RequestMapping("/gologin")
-    public String gologin() {
+    //请求注册/登录页面
+    @RequestMapping("/login")
+    public String login() {
         return "login";
     }
-    /**
-     * 用户登录
-     *
-     * @param user,httpsession
-     * @return
-     */
-    @RequestMapping("/login")
-    @ResponseBody
-    public String login(User user, HttpSession httpSession) {
-        User tempuser = userService.getUserByAccountAndPassword(user.getUserAccount(), user.getUserPassword());
-        if (tempuser != null) {
-            httpSession.setAttribute("user", tempuser);
-            if(tempuser.getUserAccount().equals("Administrator")) return "Admin";
-            return "Normal";
+
+    //处理用户注册
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
+    public String signUp(User user, HttpSession session) {
+        User oldUser = userService.getUserByAccount(user.getUserAccount());
+        if(oldUser!=null){
+            //已存在同名账号，注册失败，重新跳转到注册/登录页面
+            return "forward:/login";
+        }else{
+            //其它注册信息暂时设置为自动填充
+            user.setUserIdentity("222426199501025513");
+            user.setUserEmail("123@qq.com");
+            user.setUserPhone("18200000000");
+            user.setUserType("general");
+
+            if(userService.setUser(user) == 0) {
+                session.setAttribute("user", user);
+            }else{
+                //存储新用户信息失败，重新跳转到注册/登录页面
+                return "forward:/login";
+            }
         }
-        return "NULL";
+        return "forward:/index";
     }
 
-
-
-    /**
-     * 注销用户
-     *
-     * @param request
-     * @return
-     */
-    @RequestMapping("logout")
-    public String logout(HttpServletRequest request) {
-        request.getSession().removeAttribute("user");
-        return "redirect:../index.html";
+    //请求主页
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
     }
 
+    //登录
+    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
+    public String signIn(User user, HttpSession httpSession) {
+        User tempUser = userService.getUserByAccountAndPassword(user.getUserAccount(), user.getUserPassword());
+        if (tempUser != null) {
+            httpSession.setAttribute("user", tempUser);
+            return "forward:/index";
+        }
 
-
-    /**
-     * 判断是否用户登陆
-     *
-     * @param request
-     * @return
-     */
-    @RequestMapping("issignin")
-    @ResponseBody
-    public String issignin(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null)
-            return "NULL";
-        else if(user.getUserAccount().equals("Administrator"))
-            return "Admin";
-        else return "Normal";
+        return "forward:/login";
     }
 
+    //注销
+    @RequestMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.removeAttribute("user");
+        return "forward:/login";
+    }
 
     @RequestMapping("/test")
     public ModelAndView getDetail(){

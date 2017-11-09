@@ -4,11 +4,13 @@ import cn.edu.zju.cst.domain.Investment;
 import cn.edu.zju.cst.domain.UserAccount;
 import cn.edu.zju.cst.domain.UserInvestment;
 import cn.edu.zju.cst.dto.UserAccountDTO;
+import cn.edu.zju.cst.dto.UserInvestmentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -76,10 +78,30 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
         return "投资成功，将从次日起开始计息";
     }
     @Override
-    public List<UserInvestment> getUserInvestments(int userId) {
+    public List<UserInvestmentDTO> getUserInvestments(int userId) {
+        List<UserInvestmentDTO> userInvestmentDTOList = new ArrayList<>();
         List<UserInvestment> userInvestmentList;
         userInvestmentList = userInvestmentDao.selectUserInvestmentsByUserId(userId);
-        return userInvestmentList;
+        if(userInvestmentList!=null){
+            for(int i=0;i<userInvestmentList.size();++i){
+                Investment investment = investmentDao.selectInvestmentById(userInvestmentList.get(i).getInvestmentId());
+                UserInvestmentDTO userInvestmentDTO =new UserInvestmentDTO();
+                userInvestmentDTO.setInvestmentName(investment.getInvestmentName());
+                double annualInterestRate = investment.getAnnualInterestRate()*100;
+                userInvestmentDTO.setAnnualInterestRate(annualInterestRate+"%");
+                int investmentHorizon = investment.getInvestmentHorizon()/30;
+                userInvestmentDTO.setInvestmentHorizon(investmentHorizon);
+                userInvestmentDTO.setStartTime(userInvestmentList.get(i).getStartTime());
+                userInvestmentDTO.setEndTime(userInvestmentList.get(i).getEndTime());
+                userInvestmentDTO.setLockPrincipal(userInvestmentList.get(i).getLockPrincipal());
+                userInvestmentDTO.setLockInterest(userInvestmentList.get(i).getLockInterest());
+                userInvestmentDTO.setPrincipal(userInvestmentList.get(i).getPrincipal());
+                userInvestmentDTO.setInterest(userInvestmentList.get(i).getInterest());
+                userInvestmentDTO.setUserInvestmentId(userInvestmentList.get(i).getId());
+                userInvestmentDTOList.add(userInvestmentDTO);
+            }
+        }
+        return userInvestmentDTOList;
     }
     @Override
     public String extractMoneyToAccount(int userInvestmentId) {
