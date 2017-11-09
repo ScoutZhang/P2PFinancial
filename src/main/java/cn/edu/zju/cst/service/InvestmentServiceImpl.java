@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import static cn.edu.zju.cst.util.DoubleUtil.*;
+
 /**
  * Created by DEAN on 2017/10/31.
  */
@@ -28,8 +30,8 @@ public class InvestmentServiceImpl implements IInvestmentService {
         //余额宝平均年收益率
         double yuebaoInterestRate = 0.0389;
         //计算银行活期储蓄和余额宝收益（余额宝年收益率已经包含了复利计算，不需要再算复利）
-        interestResultDTO.setDepositBankInterest(principal*bankInterestRate/365*investmentHorizon);
-        interestResultDTO.setYuebaoInterest(principal*yuebaoInterestRate/365*investmentHorizon);
+        interestResultDTO.setDepositBankInterest(dealWithPoint2(principal*bankInterestRate/365*investmentHorizon));
+        interestResultDTO.setYuebaoInterest(dealWithPoint2(principal*yuebaoInterestRate/365*investmentHorizon));
         //判断是否符合 一次性还本付息（rdm）
         if("rdm".equals(investmentRepayment)){
             //判断是否符合 每日还本付息 投资项目
@@ -38,23 +40,23 @@ public class InvestmentServiceImpl implements IInvestmentService {
                 double y = investmentHorizon;
                 double totalMoney = Math.pow(x,y)*principal;
                 double totalInterest = totalMoney-principal;
-                interestResultDTO.setTotalInterest(totalInterest);
-                interestResultDTO.setAverageInterest(totalInterest/investmentHorizon);
+                interestResultDTO.setTotalInterest(dealWithPoint2(totalInterest));
+                interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
                 return interestResultDTO;
             }else if("monthly".equals(interestExpiryDate)&&"f".equals(investmentCompound)){
                 //符合 一次性还本付息 投资项目
                 int numOfMonth = investmentHorizon/30;
                 double totalInterest = principal*annualInterestRate/12*numOfMonth;
-                interestResultDTO.setTotalInterest(totalInterest);
-                interestResultDTO.setAverageInterest(totalInterest/investmentHorizon);
+                interestResultDTO.setTotalInterest(dealWithPoint2(totalInterest));
+                interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
                 return interestResultDTO;
             }
         }else if("mpmd".equals(investmentRepayment)&&"monthly".equals(interestExpiryDate)&&"f".equals(investmentCompound)){
             //符合 按月付息到期付本 项目
             int numOfMonth = investmentHorizon/30;
             double totalInterest = principal*annualInterestRate/12*numOfMonth;
-            interestResultDTO.setTotalInterest(totalInterest);
-            interestResultDTO.setAverageInterest(totalInterest/investmentHorizon);
+            interestResultDTO.setTotalInterest(dealWithPoint2(totalInterest));
+            interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
             return interestResultDTO;
         }else if("acm".equals(investmentRepayment)&&"monthly".equals(interestExpiryDate)&&"f".equals(investmentCompound)){
             //符合 等额本金 项目
@@ -64,8 +66,8 @@ public class InvestmentServiceImpl implements IInvestmentService {
             for(int i=0;i<numOfMonth;++i){
                 totalInterest+=(principal-i*returnPrincipal)*annualInterestRate/12;
             }
-            interestResultDTO.setTotalInterest(totalInterest);
-            interestResultDTO.setAverageInterest(totalInterest/investmentHorizon);
+            interestResultDTO.setTotalInterest(dealWithPoint2(totalInterest));
+            interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
             return interestResultDTO;
         }else if("acpim".equals(investmentRepayment)&&"monthly".equals(interestExpiryDate)&&"f".equals(investmentCompound)){
             //符合 等额本息 项目
@@ -77,8 +79,8 @@ public class InvestmentServiceImpl implements IInvestmentService {
             double part2 = principal*part1;
             double part3 = Math.pow(1+monthlyInterestRate,numOfMonth)-1;
             double totalInterest = part2/part3;
-            interestResultDTO.setTotalInterest(totalInterest);
-            interestResultDTO.setAverageInterest(totalInterest/investmentHorizon);
+            interestResultDTO.setTotalInterest(dealWithPoint2(totalInterest));
+            interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
             return interestResultDTO;
         }
         //以上均不符合，没有对应的项目收益计算
@@ -104,16 +106,16 @@ public class InvestmentServiceImpl implements IInvestmentService {
             double part1 = Math.pow(1+monthlyInterestRate,n-1)*principal*monthlyInterestRate;
             double part2 = Math.pow(1+monthlyInterestRate,numOfMonth)-1;
             double part3 = part1/part2;
-            returnPrincipal.add(part3);
+            returnPrincipal.add(dealWithPoint2(part3));
             //每月回款利息
             double part4 = Math.pow(1+monthlyInterestRate,numOfMonth)-Math.pow(1+monthlyInterestRate,n-1);
             double part5 = principal*monthlyInterestRate*part4;
             double part6 = Math.pow(1+monthlyInterestRate,numOfMonth)-1;
             double part7 = part5/part6;
-            returnInterest.add(part7);
+            returnInterest.add(dealWithPoint2(part7));
             //每月回款总额
             double part8 = part3+part7;
-            returnMoney.add(part8);
+            returnMoney.add(dealWithPoint2(part8));
         }
         regularResultDTO.setReturnPrincipal(returnPrincipal);
         regularResultDTO.setReturnInterest(returnInterest);
@@ -134,13 +136,13 @@ public class InvestmentServiceImpl implements IInvestmentService {
         for(int n=0;n<numOfMonth;++n){
             //每月回款本金
             double part1 = principal/numOfMonth;
-            returnPrincipal.add(part1);
+            returnPrincipal.add(dealWithPoint2(part1));
             //每月回款利息
             double part2 = (principal-part1*n)*monthlyInterestRate;
-            returnInterest.add(part2);
+            returnInterest.add(dealWithPoint2(part2));
             //每月回款总额
             double part3 = part1+part2;
-            returnMoney.add(part3);
+            returnMoney.add(dealWithPoint2(part3));
         }
         regularResultDTO.setReturnPrincipal(returnPrincipal);
         regularResultDTO.setReturnInterest(returnInterest);
@@ -166,13 +168,13 @@ public class InvestmentServiceImpl implements IInvestmentService {
             }else{
                 part1 = 0;
             }
-            returnPrincipal.add(part1);
+            returnPrincipal.add(dealWithPoint2(part1));
             //每月回款利息
             double part2 = principal*monthlyInterestRate;
-            returnInterest.add(part2);
+            returnInterest.add(dealWithPoint2(part2));
             //每月回款总额
             double part3 = part1+part2;
-            returnMoney.add(part3);
+            returnMoney.add(dealWithPoint2(part3));
         }
         regularResultDTO.setReturnPrincipal(returnPrincipal);
         regularResultDTO.setReturnInterest(returnInterest);
@@ -202,7 +204,7 @@ public class InvestmentServiceImpl implements IInvestmentService {
         //转换investmentList为InvestmentOverviewDTO类实例
         for(int i=0;i<investmentList.size();++i){
             double part1 = investmentList.get(i).getAnnualInterestRate()*100;
-            String part2 = part1+"%";
+            String part2 = dealWithPoint2(part1)+"%";
             annualInterestRate.add(part2);
             int part3 = investmentList.get(i).getInvestmentHorizon();
             int part4 = part3/30;
@@ -221,7 +223,7 @@ public class InvestmentServiceImpl implements IInvestmentService {
         investmentDetailDTO.setInvestmentName(investment.getInvestmentName());
         investmentDetailDTO.setInvestmentIntroduction(investment.getInvestmentIntroduction());
         double part1 = investment.getAnnualInterestRate()*100;
-        String part2 = part1+"%";
+        String part2 = dealWithPoint2(part1)+"%";
         investmentDetailDTO.setAnnualInterestRate(part2);
         int part3 = investment.getInvestmentHorizon();
         int part4 = part3/30;
@@ -252,6 +254,4 @@ public class InvestmentServiceImpl implements IInvestmentService {
     public Investment getInvestmentById(int id) {
         return investmentDao.selectInvestmentById(id);
     }
-
-
 }

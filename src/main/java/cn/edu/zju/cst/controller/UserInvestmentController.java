@@ -7,6 +7,7 @@ import cn.edu.zju.cst.service.IUserInvestmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -29,19 +30,23 @@ public class UserInvestmentController {
 
     //新增投资
     @RequestMapping("/setNewInvestment")
-    public void setNewInvestment(HttpSession session, int investmentId, double principal){
+    @ResponseBody
+    public Map<String,Object> setNewInvestment(HttpSession session, int investmentId, double principal){
         User user = (User) session.getAttribute("user");
         String result=null;
         if(user!=null){
             result = userInvestmentService.setUserInvestment(user.getId(),investmentId,principal);
         }
-        session.setAttribute("investmentResult",result);
+        Map<String, Object> map = new HashMap<>();
+        map.put("result",result);
+        return map;
     }
 
     //个人信息页面
     @RequestMapping("/userInfor")
     public String userInfor(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
+        //System.err.println(user);
         List<UserInvestmentDTO> userInvestmentList = userInvestmentService.getUserInvestments(user.getId());
         model.addAttribute("userInvestmentList",userInvestmentList);
         UserAccountDTO userAccountDTO = userInvestmentService.getUserAccount(user.getId());
@@ -66,7 +71,7 @@ public class UserInvestmentController {
 
     //测试
     @RequestMapping("/testDayByDay")
-    public void testDayByDay(){
+    public String testDayByDay(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try{
@@ -75,5 +80,6 @@ public class UserInvestmentController {
         }catch(ParseException e){
             e.printStackTrace();
         }
+        return "index";
     }
 }

@@ -28,15 +28,15 @@ public class UserServiceImpl implements IUserService{
     }
     @Override
     public int setUser(User user) {
+        int result1 = userDao.insertUser(user);
         //用户账户信息暂时为默认创建，暂时没有支付接口
         UserAccount userAccount = new UserAccount();
         userAccount.setAccountBalance(50000);
         userAccount.setAccruedInterest(0);
         userAccount.setBankCard("6217003511152584562 农行");
-        userAccount.setUserId(user.getId());
-        int result1 = userAccountDao.insertUserAccount(userAccount);
-        int result2 = userDao.insertUser(user);
-        if(result1==0&&result2==0){
+        userAccount.setUserId(userDao.selectUserByAccount(user.getUserAccount()).getId());
+        int result2 = userAccountDao.insertUserAccount(userAccount);
+        if(result1==1&&result2==1){
             return 0;
         }else{
             return 1;

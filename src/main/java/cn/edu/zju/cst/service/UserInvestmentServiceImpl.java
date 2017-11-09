@@ -15,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import static cn.edu.zju.cst.util.DoubleUtil.*;
+
 /**
  * Created by DEAN on 2017/11/1.
  */
@@ -87,16 +89,16 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
                 Investment investment = investmentDao.selectInvestmentById(userInvestmentList.get(i).getInvestmentId());
                 UserInvestmentDTO userInvestmentDTO =new UserInvestmentDTO();
                 userInvestmentDTO.setInvestmentName(investment.getInvestmentName());
-                double annualInterestRate = investment.getAnnualInterestRate()*100;
+                double annualInterestRate = dealWithPoint2(investment.getAnnualInterestRate()*100);
                 userInvestmentDTO.setAnnualInterestRate(annualInterestRate+"%");
                 int investmentHorizon = investment.getInvestmentHorizon()/30;
                 userInvestmentDTO.setInvestmentHorizon(investmentHorizon);
                 userInvestmentDTO.setStartTime(userInvestmentList.get(i).getStartTime());
                 userInvestmentDTO.setEndTime(userInvestmentList.get(i).getEndTime());
-                userInvestmentDTO.setLockPrincipal(userInvestmentList.get(i).getLockPrincipal());
-                userInvestmentDTO.setLockInterest(userInvestmentList.get(i).getLockInterest());
-                userInvestmentDTO.setPrincipal(userInvestmentList.get(i).getPrincipal());
-                userInvestmentDTO.setInterest(userInvestmentList.get(i).getInterest());
+                userInvestmentDTO.setLockPrincipal(dealWithPoint2(userInvestmentList.get(i).getLockPrincipal()));
+                userInvestmentDTO.setLockInterest(dealWithPoint2(userInvestmentList.get(i).getLockInterest()));
+                userInvestmentDTO.setPrincipal(dealWithPoint2(userInvestmentList.get(i).getPrincipal()));
+                userInvestmentDTO.setInterest(dealWithPoint2(userInvestmentList.get(i).getInterest()));
                 userInvestmentDTO.setUserInvestmentId(userInvestmentList.get(i).getId());
                 userInvestmentDTOList.add(userInvestmentDTO);
             }
@@ -133,9 +135,9 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
     public UserAccountDTO getUserAccount(int userId) {
         UserAccountDTO userAccountDTO = new UserAccountDTO();
         UserAccount userAccount = userAccountDao.selectUserAccountByUserId(userId);
-        userAccountDTO.setAccountBalance(userAccount.getAccountBalance());
+        userAccountDTO.setAccountBalance(dealWithPoint2(userAccount.getAccountBalance()));
         userAccountDTO.setBankCard(userAccount.getBankCard());
-        userAccountDTO.setAccruedInterest(userAccount.getAccruedInterest());
+        userAccountDTO.setAccruedInterest(dealWithPoint2(userAccount.getAccruedInterest()));
         //计算lockMoney和money的值
         double lockMoney=0;
         double money=0;
@@ -154,8 +156,8 @@ public class UserInvestmentServiceImpl implements IUserInvestmentService {
                 money+=part2;
             }
         }
-        userAccountDTO.setLockMoney(lockMoney);
-        userAccountDTO.setMoney(money);
+        userAccountDTO.setLockMoney(dealWithPoint2(lockMoney));
+        userAccountDTO.setMoney(dealWithPoint2(money));
         return userAccountDTO;
     }
     @Override

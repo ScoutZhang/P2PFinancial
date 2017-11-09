@@ -37,7 +37,11 @@ public interface IInvestmentService {
 
     //返回具体投资项目的详情
     //传入参数：还款方式（acpim、acm、mpmd、rdm四种）、投资期限
+    //返回参数：InvestmentOverviewDTO类实例
     InvestmentDetailDTO getInvestmentDetail(String investmentRepayment, int investmentHorizon);
 
+    //通过id得到指定投资项目
+    //传入参数：投资项目id
+    //返回参数：Investment类实例
     Investment getInvestmentById(int id);
 }

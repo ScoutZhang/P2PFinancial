@@ -5,7 +5,6 @@ import cn.edu.zju.cst.service.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -39,7 +38,8 @@ public class UserController {
             user.setUserType("general");
 
             if(userService.setUser(user) == 0) {
-                session.setAttribute("user", user);
+                User currentUser = userService.getUserByAccount(user.getUserAccount());
+                session.setAttribute("user", currentUser);
             }else{
                 //存储新用户信息失败，重新跳转到注册/登录页面
                 return "forward:/login";

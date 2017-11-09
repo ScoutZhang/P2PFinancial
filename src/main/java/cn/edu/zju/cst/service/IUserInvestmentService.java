@@ -1,7 +1,6 @@
 package cn.edu.zju.cst.service;
 
 import cn.edu.zju.cst.dto.UserAccountDTO;
-import cn.edu.zju.cst.domain.UserInvestment;
 import cn.edu.zju.cst.dto.UserInvestmentDTO;
 
 import java.text.ParseException;

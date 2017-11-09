@@ -73,11 +73,11 @@
                             <div class="tab-pane" id="register">
                                 <form action="/signUp" method="post">
                                     <div class="form-group">
-                                        <input name="userAccount2" type="text" value="" placeholder="请输入您的账号" class="form-group"
+                                        <input name="userAccount" type="text" value="" placeholder="请输入您的账号" class="form-group"
                                                style="height:35px;width:280px;">
                                     </div>
                                     <div class="form-group">
-                                        <input name="userPassword2" type="password" value="" placeholder="请输入您的密码" class="form-group" style="height:35px;width:280px;">
+                                        <input name="userPassword" type="password" value="" placeholder="请输入您的密码" class="form-group" style="height:35px;width:280px;">
                                     </div>
                                     <button type="submit" class="btn btn-block btn-fill btn-info btn-group" contenteditable="true" style="height:40px;width:100px;">注册</button>
                                 </form>
