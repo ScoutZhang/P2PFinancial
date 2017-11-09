@@ -61,23 +61,23 @@
                             <div class="tab-pane active" id="login">
                                 <form>
                                     <div class="form-group">
-                                        <input id="account" type="text" value="" placeholder="请输入您的账号" class="form-group"
+                                        <input id="email" type="text" value="" placeholder="请输入您的邮箱" class="form-group"
                                                style="height:35px;width:280px;">
                                     </div>
                                     <div class="form-group">
                                         <input id="pwd" type="password" value="" placeholder="请输入您的密码" class="form-group" style="height:35px;width:280px;">
                                     </div>
-                                    <button type="submit" class="btn btn-block btn-fill btn-info btn-group" contenteditable="true" style="height:40px;width:100px;">登录</button>
+                                    <button type="submit" class="btn btn-block btn-fill btn-info btn-group" contenteditable="true" style="height:40px;width:100px;">登陆</button>
                                 </form>
                             </div>
                             <div class="tab-pane" id="register">
                                 <form>
                                     <div class="form-group">
-                                        <input id="regAccount" type="text" value="" placeholder="请输入新的账号" class="form-group"
+                                        <input id="email-re" type="text" value="" placeholder="邮箱" class="form-group"
                                                style="height:35px;width:280px;">
                                     </div>
                                     <div class="form-group">
-                                        <input id="regPwd" type="password" value="" placeholder="请输入新的密码" class="form-group" style="height:35px;width:280px;">
+                                        <input id="pwd-re" type="password" value="" placeholder="密码" class="form-group" style="height:35px;width:280px;">
                                     </div>
                                     <button type="submit" class="btn btn-block btn-fill btn-info btn-group" contenteditable="true" style="height:40px;width:100px;">注册</button>
                                 </form>
@@ -95,7 +95,7 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <div class="credits">
-                © <script>document.write(new Date().getFullYear())</script> 悦悦贷投资理财 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - 版权所有 <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>.
+                © <script>document.write(new Date().getFullYear())</script>2017 Get Shit Done Kit by  Creative Tim, More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>.
             </div>
         </div>
     </div>
