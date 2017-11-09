@@ -1,18 +1,14 @@
 package cn.edu.zju.cst.controller;
 
 import cn.edu.zju.cst.domain.Investment;
-import cn.edu.zju.cst.dto.InterestResultDTO;
-import cn.edu.zju.cst.dto.InvestmentDetailDTO;
-import cn.edu.zju.cst.dto.InvestmentOverviewDTO;
-import cn.edu.zju.cst.dto.RegularResultDTO;
+import cn.edu.zju.cst.dto.*;
 import cn.edu.zju.cst.service.IInvestmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * Created by jolivan on 2017/11/6.
@@ -75,8 +71,8 @@ public class InvestmentController {
     }
 
     //利息计算器
-    @RequestMapping("/getInvestmentCalculator")
-    public String getInvestmentCalculator(double principal, double annualInterestRate,
+    @RequestMapping("/getInvestmentCalculator2")
+    public String getInvestmentCalculator2(double principal, double annualInterestRate,
                                                   int investmentHorizon, String investmentRepayment,
                                                   String interestExpiryDate, String investmentCompound, int investNum, Model model){
         InterestResultDTO interestResultDTO = investmentService.calculateInterest(principal, annualInterestRate, investmentHorizon, investmentRepayment, interestExpiryDate, investmentCompound);
@@ -90,5 +86,16 @@ public class InvestmentController {
         }else{
             return "invest_5";
         }
+    }
+
+    //利息计算器,JSON格式
+    @RequestMapping(value="/getInvestmentCalculator",method = RequestMethod.POST)
+    @ResponseBody
+    public InterestResultDTO getInvestmentCalculator(@RequestBody CalculatorDTO calculatorDTO){
+        System.err.println(calculatorDTO);
+        InterestResultDTO interestResultDTO = investmentService.calculateInterest(calculatorDTO.getPrincipal(), calculatorDTO.getAnnualInterestRate(), calculatorDTO.getInvestmentHorizon(),
+                calculatorDTO.getInvestmentRepayment(), calculatorDTO.getInterestExpiryDate(), calculatorDTO.getInvestmentCompound());
+        System.err.println(interestResultDTO);
+        return interestResultDTO;
     }
 }
