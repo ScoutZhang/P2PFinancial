@@ -26,31 +26,31 @@ public class UserInvestmentServiceTest extends SpringTestCase{
 
     Logger logger = Logger.getLogger(UserInvestmentServiceTest.class);
 
-    @Test
-    public void testSetUserInvestment(){
-        //新增投资
-        //用户id：1  投资项目id：2  投资本金：15000
-        String result = userInvestmentService.setUserInvestment(1,2,15000);
-        logger.debug("新增投资操作结果："+result);
-        //获取用户的所有投资
-        List<UserInvestment> userInvestmentList = userInvestmentService.getUserInvestments(1);
-        for(int i=0;i<userInvestmentList.size();++i){
-            logger.debug("用户投资项目："+userInvestmentList.get(i));
-        }
-        //已更新投资项目的累计人数，项目2起初为0
-        logger.debug("该项目累计人数已更新为："+investmentService.getInvestmentDetail("rdm",90).getNumberOfPeopleAdded());
-        //已更新用户账户余额，用户1起初为50000
-        logger.debug("账户余额为："+userInvestmentService.getUserAccount(1).getAccountBalance());
-    }
+//    @Test
+//    public void testSetUserInvestment(){
+//        //新增投资
+//        //用户id：1  投资项目id：2  投资本金：15000
+//        String result = userInvestmentService.setUserInvestment(1,2,15000);
+//        logger.debug("新增投资操作结果："+result);
+//        //获取用户的所有投资
+//        List<UserInvestment> userInvestmentList = userInvestmentService.getUserInvestments(1);
+//        for(int i=0;i<userInvestmentList.size();++i){
+//            logger.debug("用户投资项目："+userInvestmentList.get(i));
+//        }
+//        //已更新投资项目的累计人数，项目2起初为0
+//        logger.debug("该项目累计人数已更新为："+investmentService.getInvestmentDetail("rdm",90).getNumberOfPeopleAdded());
+//        //已更新用户账户余额，用户1起初为50000
+//        logger.debug("账户余额为："+userInvestmentService.getUserAccount(1).getAccountBalance());
+//    }
 
-    @Test
-    public void testGetUserInvestments(){
-        //获取用户的所有投资，不存在的用户id，list的size为0
-        List<UserInvestment> userInvestmentList = userInvestmentService.getUserInvestments(555);
-        for(int i=0;i<userInvestmentList.size();++i){
-            logger.debug("用户投资项目："+userInvestmentList.get(i));
-        }
-    }
+//    @Test
+//    public void testGetUserInvestments(){
+//        //获取用户的所有投资，不存在的用户id，list的size为0
+//        List<UserInvestment> userInvestmentList = userInvestmentService.getUserInvestments(555);
+//        for(int i=0;i<userInvestmentList.size();++i){
+//            logger.debug("用户投资项目："+userInvestmentList.get(i));
+//        }
+//    }
 
     @Test
     public void testGetUserAccount(){
