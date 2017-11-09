@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>首页</title>
+    <title>每日返还本息</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/WEB-INF/view/index.jsp">
+                <a href="/index">
                     <img src="/static/img/logo.png" class="img-rounded" style="margin-left:40px; margin-top:10px; height:90px; width:80px;">
                 </a>
             </div>
@@ -46,23 +46,26 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="margin-top: 1%">
-                    <li><a href="/WEB-INF/view/index.jsp">首页</a></li>
-                    <li class="active"><a href="/WEB-INF/view/invest_1.jsp">一次性返还本息</a></li>
-                    <li><a href="/jsp/invest_3.jsp">每日返还本息</a></li>
-                    <li><a href="/jsp/invest_4.jsp">等额本金</a></li>
-                    <li><a href="/jsp/invest_5.jsp">等额本息</a></li>
-                    <li><a href="/jsp/invest_6.jsp">按月付息</a></li>
+                    <li class="active"><a href="/index">首页</a></li>
+                    <li><a href="/investmentOverview?investNum=1">一次性返还本息</a></li>
+                    <li><a href="/invest">每日返还本息</a></li>
+                    <li><a href="/investmentOverview?investNum=3">等额本金</a></li>
+                    <li><a href="/investmentOverview?investNum=4">等额本息</a></li>
+                    <li><a href="/investmentOverview?investNum=5">按月付息</a></li>
                 </ul>
 
+                <%if(session.getAttribute("user")==null){%>
                 <div class="text-right" style="margin-top: 1%;margin-right: 5%;">
-                    <a href="/WEB-INF/view/login.jsp" class="btn btn-round btn-default">登录/注册</a>
+                    <a href="/login" class="btn btn-round btn-default">登录/注册</a>
                 </div>
+                <%}else{%>
+                <div class="text-right" style="margin-top: 1%;margin-right: 5%;">
+                    <a href="/userInfor" class="btn btn-round btn-default">个人信息</a>
+                </div>
+                <%}%>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-</div>
-<div class="container">
-    <div class="img-src" style="background-image: url('/static/img/invest_1.png')"></div>
 </div>
 </body>
 

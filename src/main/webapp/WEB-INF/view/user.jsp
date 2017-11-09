@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: chacha
@@ -25,6 +26,17 @@
 
     <link href="/static/bootstrap3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript">
+        function out() {
+            var msa = "您确认退出吗？\n\n请确认！";
+            if (confirm(msa) == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <div id="navbar">
@@ -38,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/WEB-INF/view/index.jsp">
+                <a href="/index">
                     <img src="/static/img/logo.png" class="img-rounded" style="margin-left:40px; margin-top:10px; height:90px; width:80px;">
                 </a>
             </div>
@@ -46,16 +58,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="margin-top: 1%">
-                    <li><a href="/WEB-INF/view/index.jsp">首页</a></li>
-                    <li><a href="/WEB-INF/view/invest_1.jsp">一次性返还本息</a></li>
-                    <li><a href="/jsp/invest_3.jsp">每日返还本息</a></li>
-                    <li><a href="/jsp/invest_4.jsp">等额本金</a></li>
-                    <li><a href="/jsp/invest_5.jsp">等额本息</a></li>
-                    <li><a href="/jsp/invest_6.jsp">按月付息</a></li>
+                    <li><a href="/index">首页</a></li>
+                    <li><a href="/investmentOverview?investNum=1">一次性返还本息</a></li>
+                    <li><a href="/invest">每日返还本息</a></li>
+                    <li><a href="/investmentOverview?investNum=3">等额本金</a></li>
+                    <li><a href="/investmentOverview?investNum=4">等额本息</a></li>
+                    <li><a href="/investmentOverview?investNum=5">按月付息</a></li>
                 </ul>
 
                 <div class="text-right" style="margin-top: 1%;margin-right: 5%;">
-                    <a class="btn btn-round btn-warning">注销</a>
+                    <a href="/logout" onclick="return out();" class="btn btn-round btn-default">退出</a>
                 </div>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -70,13 +82,13 @@
                 </div>
                 <div class="content">
                     <div class="text-center">
-                        <h4 class="title">@用户名<br></h4>
+                        <h4 class="title">@${user.userAccount}<br></h4>
                     </div>
                     <br>
                     <p class="description text-left" style="margin-left: 5%;font-size: 100%;">
-                        身份证号：43040800000000000X<br>
-                        个人电话：176XXXX0716<br>
-                        个人邮箱：vivian59@qq.com
+                        身份证号：${user.userIdentity}<br>
+                        个人电话：${user.userPhone}<br>
+                        个人邮箱：${user.userEmail}
                     </p>
                 </div>
             </div>
@@ -86,7 +98,7 @@
         </div>
         <div class="col-md-3">
             <div class="text-center" style="margin-top: 10%;margin-right: 20%;">
-                <h5><small>账户余额</small></h5><p class="h1" style="color: #ec971f;">680.3<a class="h5">&emsp;元</a></p>
+                <h5><small>账户余额</small></h5><p class="h1" style="color: #ec971f;">${userAccount.accountBalance}<a class="h5">&emsp;元</a></p>
             </div>
             <br><br>
             <div class="row" style="margin-right: 10%">
@@ -104,18 +116,18 @@
         <div class="col-md-4">
             <div style="margin-right: 20%;margin-top: 3%;">
                 <div class="text-center">
-                    <h5><small>累计获得收益</small></h5><p class="h1" style="color: #ec971f;">680.3<a class="h5">&emsp;元</a></p>
+                    <h5><small>累计获得收益</small></h5><p class="h1" style="color: #ec971f;">${userAccount.accruedInterest}<a class="h5">&emsp;元</a></p>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-center">
-                            <h5><small>目前在投金额</small></h5><p class="h2" style="color: #ec971f;">680.3<a class="h5">&emsp;元</a></p>
+                            <h5><small>目前在投金额</small></h5><p class="h2" style="color: #ec971f;">${userAccount.lockMoney}<a class="h5">&emsp;元</a></p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="text-center">
-                            <h5><small>目前可提金额</small></h5><p class="h2" style="color: #ec971f;">00.00<a class="h5">&emsp;元</a></p>
+                            <h5><small>目前可提金额</small></h5><p class="h2" style="color: #ec971f;">${userAccount.money}<a class="h5">&emsp;元</a></p>
                         </div>
                     </div>
                 </div>
@@ -138,28 +150,34 @@
                                 <thead>
                                 <tr><th>项目名称</th>
                                     <th>年化率</th>
-                                    <th>投资期限</th>
+                                    <th>投资期限（月）</th>
                                     <th>开始日期</th>
                                     <th>结束日期</th>
                                     <th>在投本金</th>
-                                    <th>再投利息</th>
-                                    <th>可提取本金/th>
+                                    <th>在投利息</th>
+                                    <th>可提取本金</th>
                                     <th>可提取利息</th>
                                     <th> </th>
                                 </tr></thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                    <td>Niger</td>
-                                    <td>Niger</td>
-                                    <td>Niger</td>
-                                    <td>Niger</td>
-                                    <td>Niger</td>
-                                    <td><button type="submit" class="btn btn-block btn-sm btn-round btn-warning" style="margin-top: 1%;">提取本息</button></td>
-                                </tr>
+                                <c:choose>
+                                    <c:when test="${!empty userInvestmentList}">
+                                        <c:forEach var="userInverstment" items="${userInvestmentList}">
+                                            <tr>
+                                                <td>${userInverstment.investmentName}</td>
+                                                <td>${userInverstment.annualInterestRate}</td>
+                                                <td>${userInverstment.investmentHorizon}</td>
+                                                <td>${userInverstment.startTime}</td>
+                                                <td>${userInverstment.endTime}</td>
+                                                <td>${userInverstment.lockPrincipal}</td>
+                                                <td>${userInverstment.lockInterest}</td>
+                                                <td>${userInverstment.principal}</td>
+                                                <td>${userInverstment.interest}</td>
+                                                <td><button type="submit" class="btn btn-block btn-sm btn-round btn-warning" style="margin-top: 1%;">提取本息</button></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                </c:choose>
                                 </tbody>
                             </table>
                         </div>

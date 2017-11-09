@@ -25,6 +25,25 @@
 
     <link href="/static/bootstrap3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript">
+        function calculator() {
+            $.ajax({
+                cache:true,
+                type:"POST",
+                url:"/getInvestmentCalculator",
+                data:$().serialize(),
+                async:false,
+                error:function (request) {
+                    alert("Connection error");
+             },
+                success:function (data) {
+
+                }
+            })
+
+        }
+    </script>
 </head>
 <body>
 <div id="navbar">
@@ -38,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/WEB-INF/view/index.jsp">
+                <a href="/index">
                     <img src="/static/img/logo.png" class="img-rounded" style="margin-left:40px; margin-top:10px; height:90px; width:80px;">
                 </a>
             </div>
@@ -46,17 +65,23 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="margin-top: 1%">
-                    <li><a href="/WEB-INF/view/index.jsp">首页</a></li>
-                    <li class="active"><a href="/WEB-INF/view/invest_1.jsp">一次性返还本息</a></li>
-                    <li><a href="/jsp/invest_3.jsp">每日返还本息</a></li>
-                    <li><a href="/jsp/invest_4.jsp">等额本金</a></li>
-                    <li><a href="/jsp/invest_5.jsp">等额本息</a></li>
-                    <li><a href="/jsp/invest_6.jsp">按月付息</a></li>
+                    <li><a href="/index">首页</a></li>
+                    <li class="active"><a href="/investmentOverview?investNum=1">一次性返还本息</a></li>
+                    <li><a href="/invest">每日返还本息</a></li>
+                    <li><a href="/investmentOverview?investNum=3">等额本金</a></li>
+                    <li><a href="/investmentOverview?investNum=4">等额本息</a></li>
+                    <li><a href="/investmentOverview?investNum=5">按月付息</a></li>
                 </ul>
 
+                <%if(session.getAttribute("user")==null){%>
                 <div class="text-right" style="margin-top: 1%;margin-right: 5%;">
-                    <a href="/WEB-INF/view/login.jsp" class="btn btn-round btn-default">登录/注册</a>
+                    <a href="/login" class="btn btn-round btn-default">登录/注册</a>
                 </div>
+                <%}else{%>
+                <div class="text-right" style="margin-top: 1%;margin-right: 5%;">
+                    <a href="/userInfor" class="btn btn-round btn-default">个人信息</a>
+                </div>
+                <%}%>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -79,7 +104,7 @@
                     </h4>
                     <hr>
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">6.0%</p><h5><small>预期年化利率</small></h5>
+                        <p class="h1" style="color: #ec971f;">6.2%</p><h5><small>预期年化利率</small></h5>
                     </div>
                     <div class="space-30"></div>
                     <hr>
@@ -97,7 +122,7 @@
                     </h4>
                     <hr>
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">6.5%</p><h5><small>预期年化利率</small></h5>
+                        <p class="h1" style="color: #ec971f;">6.8%</p><h5><small>预期年化利率</small></h5>
                     </div>
                     <div class="space-30"></div>
                     <hr>
@@ -115,7 +140,7 @@
                     </h4>
                     <hr>
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">7.2%</p><h5><small>预期年化利率</small></h5>
+                        <p class="h1" style="color: #ec971f;">7.8%</p><h5><small>预期年化利率</small></h5>
                     </div>
                     <div class="space-30"></div>
                     <hr>
@@ -133,12 +158,12 @@
                     </h4>
                     <hr>
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">8.8%</p><h5><small>预期年化利率</small></h5>
+                        <p class="h1" style="color: #ec971f;">9.0%</p><h5><small>预期年化利率</small></h5>
                     </div>
                     <div class="space-30"></div>
                     <hr>
                     <div class="actions">
-                        <a class="btn btn-lg btn-warning btn-fill" href="/WEB-INF/view/detail.jsp">查看详情</a>
+                        <a class="btn btn-lg btn-warning btn-fill" href="/investmentDetail">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -157,18 +182,18 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <input id="principal" type="text" value="" placeholder="请输入您的本金" class="form-control">
+                                <input name="principal" id="principal" type="text" value="" placeholder="请输入您的本金" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input id="rate" type="text" value="" placeholder="请输入您的年利率" class="form-control">
+                                <input name="rate" id="rate" type="text" value="" placeholder="请输入您的年利率" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input id="term" type="text" value="" placeholder="请输入您的投资期限" class="form-control">
+                                <input name="term" id="term" type="text" value="" placeholder="请输入您的投资期限" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="text-left" style="margin-top: 3%;">
-                                <button type="submit" class="btn btn-block btn-lg btn-round btn-warning">计算</button>
+                                <button  type="submit" class="btn btn-block btn-lg btn-round btn-warning" onclick="calculator()">计算</button>
                             </div>
                             <br>
                             <div class="text-left">
@@ -182,6 +207,24 @@
         <div class="col-md-4">
             <div class="text-center">
                 <p style="color: #ec971f;font-size: 600%;">0000.00</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                <h5><small>平均每日收益</small></h5><p class="h2" style="color: #ec971f;">${userAccount.lockMoney}<a class="h5">&emsp;元</a></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center">
+                <h5><small>银行活期收益</small></h5><p class="h2" style="color: #ec971f;">${userAccount.money}<a class="h5">&emsp;元</a></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center">
+                <h5><small>余额宝收益</small></h5><p class="h2" style="color: #ec971f;">${userAccount.money}<a class="h5">&emsp;元</a></p>
             </div>
         </div>
     </div>
