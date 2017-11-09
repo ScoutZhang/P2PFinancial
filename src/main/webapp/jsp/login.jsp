@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="space-100">
-    <a href="/index.jsp">
+    <a href="/jsp/index.jsp">
         <img src="/static/img/logo.png" class="img-rounded" style="margin-left:40px; margin-top:10px; height:90px; width:80px;">
     </a>
 </div>
@@ -59,25 +59,25 @@
                         <!-- 选项卡相对应的内容 -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="login">
-                                <form>
+                                <form action="/signIn" method="post">
                                     <div class="form-group">
-                                        <input id="email" type="text" value="" placeholder="请输入您的邮箱" class="form-group"
+                                        <input id="userAccount" type="text" value="" placeholder="请输入您的账号" class="form-group"
                                                style="height:35px;width:280px;">
                                     </div>
                                     <div class="form-group">
-                                        <input id="pwd" type="password" value="" placeholder="请输入您的密码" class="form-group" style="height:35px;width:280px;">
+                                        <input id="userPassword" type="password" value="" placeholder="请输入您的密码" class="form-group" style="height:35px;width:280px;">
                                     </div>
-                                    <button type="submit" class="btn btn-block btn-fill btn-info btn-group" contenteditable="true" style="height:40px;width:100px;">登陆</button>
+                                    <button type="submit" class="btn btn-block btn-fill btn-info btn-group" contenteditable="true" style="height:40px;width:100px;">登录</button>
                                 </form>
                             </div>
                             <div class="tab-pane" id="register">
-                                <form>
+                                <form action="/signUp" method="post">
                                     <div class="form-group">
-                                        <input id="email-re" type="text" value="" placeholder="邮箱" class="form-group"
+                                        <input id="userAccount" type="text" value="" placeholder="请输入您的账号" class="form-group"
                                                style="height:35px;width:280px;">
                                     </div>
                                     <div class="form-group">
-                                        <input id="pwd-re" type="password" value="" placeholder="密码" class="form-group" style="height:35px;width:280px;">
+                                        <input id="userPassword" type="password" value="" placeholder="请输入您的密码" class="form-group" style="height:35px;width:280px;">
                                     </div>
                                     <button type="submit" class="btn btn-block btn-fill btn-info btn-group" contenteditable="true" style="height:40px;width:100px;">注册</button>
                                 </form>
