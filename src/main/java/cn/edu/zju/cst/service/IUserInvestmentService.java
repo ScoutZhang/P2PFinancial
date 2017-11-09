@@ -2,6 +2,7 @@ package cn.edu.zju.cst.service;
 
 import cn.edu.zju.cst.dto.UserAccountDTO;
 import cn.edu.zju.cst.domain.UserInvestment;
+import cn.edu.zju.cst.dto.UserInvestmentDTO;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -21,7 +22,7 @@ public interface IUserInvestmentService {
     //获取用户的所有投资
     //传入参数：用户ID
     //返回参数：UserInvestment类实例列表
-    List<UserInvestment> getUserInvestments(int userId);
+    List<UserInvestmentDTO> getUserInvestments(int userId);
 
     //从指定投资项目中提取出来本金、利息到用户账户
     //传入参数：用户投资项目ID
