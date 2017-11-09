@@ -19,11 +19,11 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-    <link href="static/bootstrap3/css/bootstrap.css" rel="stylesheet" />
-    <link href="static/assets/css/gsdk.css" rel="stylesheet" />
-    <link href="static/assets/css/demo.css" rel="stylesheet" />
+    <link href="../../static/bootstrap3/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../static/assets/css/gsdk.css" rel="stylesheet" />
+    <link href="../../static/assets/css/demo.css" rel="stylesheet" />
 
-    <link href="static/bootstrap3/css/font-awesome.css" rel="stylesheet">
+    <link href="../../static/bootstrap3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/index.jsp">
+                <a href="/WEB-INF/view/index.jsp">
                     <img src="/static/img/logo.png" class="img-rounded" style="margin-left:40px; margin-top:10px; height:90px; width:80px;">
                 </a>
             </div>
@@ -46,16 +46,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="margin-top: 1%">
-                    <li class="active"><a href="/index.jsp">首页</a></li>
-                    <li><a href="/jsp/invest_1.jsp">一次性返还本息</a></li>
-                    <li><a href="/jsp/invest_2.jsp">每日返还本息</a></li>
+                    <li class="active"><a href="/WEB-INF/view/index.jsp">首页</a></li>
+                    <li><a href="/WEB-INF/view/invest_1.jsp">一次性返还本息</a></li>
+                    <li><a href="/WEB-INF/view/invest_2.jsp">每日返还本息</a></li>
                     <li><a href="/jsp/invest_3.jsp">等额本金</a></li>
                     <li><a href="/jsp/invest_4.jsp">等额本息</a></li>
-                    <li><a href="/jsp/user.jsp">按月付息</a></li>
+                    <li><a href="/WEB-INF/view/user.jsp">按月付息</a></li>
                 </ul>
 
                 <div class="text-right" style="margin-top: 1%;margin-right: 5%;">
-                    <a href="/jsp/login.jsp" class="btn btn-round btn-default">登录/注册</a>
+                    <a href="/WEB-INF/view/login.jsp" class="btn btn-round btn-default">登录/注册</a>
                 </div>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -96,22 +96,22 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <img src="static/img/insurance.PNG" style="margin-top:10px;">
+            <img src="../../static/img/insurance.PNG" style="margin-top:10px;">
         </div>
     </div>
 </div>
 
 </body>
 
-<script src="static/jquery/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="static/assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<script src="../../static/jquery/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="../../static/assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
 
-<script src="static/bootstrap3/js/bootstrap.js" type="text/javascript"></script>
-<script src="static/assets/js/gsdk-checkbox.js"></script>
-<script src="static/assets/js/gsdk-radio.js"></script>
-<script src="static/assets/js/gsdk-bootstrapswitch.js"></script>
-<script src="static/assets/js/get-shit-done.js"></script>
-<script src="static/assets/js/custom.js"></script>
+<script src="../../static/bootstrap3/js/bootstrap.js" type="text/javascript"></script>
+<script src="../../static/assets/js/gsdk-checkbox.js"></script>
+<script src="../../static/assets/js/gsdk-radio.js"></script>
+<script src="../../static/assets/js/gsdk-bootstrapswitch.js"></script>
+<script src="../../static/assets/js/get-shit-done.js"></script>
+<script src="../../static/assets/js/custom.js"></script>
 
 <script type="text/javascript">
 

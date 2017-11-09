@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/index.jsp">
+                <a href="/WEB-INF/view/index.jsp">
                     <img src="/static/img/logo.png" class="img-rounded" style="margin-left:40px; margin-top:10px; height:90px; width:80px;">
                 </a>
             </div>
@@ -46,8 +46,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="margin-top: 1%">
-                    <li><a href="/index.jsp">首页</a></li>
-                    <li><a href="/jsp/invest_1.jsp">一次性返还本息</a></li>
+                    <li><a href="/WEB-INF/view/index.jsp">首页</a></li>
+                    <li><a href="/WEB-INF/view/invest_1.jsp">一次性返还本息</a></li>
                     <li><a href="/jsp/invest_3.jsp">每日返还本息</a></li>
                     <li><a href="/jsp/invest_4.jsp">等额本金</a></li>
                     <li><a href="/jsp/invest_5.jsp">等额本息</a></li>

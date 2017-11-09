@@ -73,11 +73,11 @@ public class UserController {
         return "forward:/login";
     }
 
-    @RequestMapping("/test")
-    public ModelAndView getDetail(){
-        ModelAndView mav = new ModelAndView("test");
-        User user = userService.getUserById(1);
-        mav.addObject("user",user);
-        return mav;
-    }
+//    @RequestMapping("/test")
+//    public ModelAndView getDetail(){
+//        ModelAndView mav = new ModelAndView("test");
+//        User user = userService.getUserById(1);
+//        mav.addObject("user",user);
+//        return mav;
+//    }
 }
