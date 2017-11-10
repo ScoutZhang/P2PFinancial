@@ -28,14 +28,6 @@
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 
     <script type="text/javascript">
-        function init(){
-            if('<%=session.getAttribute("investmentResult")%>'!="null"){
-                var msg = '<%=session.getAttribute("investmentResult")%>';
-                alert(msg);
-                <%session.removeAttribute("investmentResult");%>
-            }
-        }
-
         function invest() {
             var msa = "您确认进行投资吗？\n\n请确认！";
             if (confirm(msa) == true) {
@@ -46,7 +38,7 @@
         }
     </script>
 </head>
-<body onload="init()">
+<body>
 <div id="navbar">
     <nav class="navbar navbar-default">
         <div class="container-fluid">

@@ -34,6 +34,11 @@
                 alert(msg);
                 <%session.removeAttribute("extractResult");%>
             }
+            if('<%=session.getAttribute("investmentResult")%>'!="null"){
+                var msg = '<%=session.getAttribute("investmentResult")%>';
+                alert(msg);
+                <%session.removeAttribute("investmentResult");%>
+            }
         }
 
         function out() {
