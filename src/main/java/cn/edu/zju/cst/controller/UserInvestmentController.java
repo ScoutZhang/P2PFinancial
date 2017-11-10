@@ -37,7 +37,7 @@ public class UserInvestmentController {
             result = userInvestmentService.setUserInvestment(user.getId(),investmentId,principal);
         }
         session.setAttribute("investmentResult",result);
-        return "user";
+        return "forward:/userInfor";
     }
 
     //个人信息页面
