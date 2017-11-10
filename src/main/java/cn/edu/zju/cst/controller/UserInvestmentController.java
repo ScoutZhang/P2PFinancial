@@ -30,16 +30,14 @@ public class UserInvestmentController {
 
     //新增投资
     @RequestMapping("/setNewInvestment")
-    @ResponseBody
-    public Map<String,Object> setNewInvestment(HttpSession session, int investmentId, double principal){
+    public String setNewInvestment(HttpSession session, int investmentId, double principal){
         User user = (User) session.getAttribute("user");
         String result=null;
         if(user!=null){
             result = userInvestmentService.setUserInvestment(user.getId(),investmentId,principal);
         }
-        Map<String, Object> map = new HashMap<>();
-        map.put("result",result);
-        return map;
+        session.setAttribute("investmentResult",result);
+        return "user";
     }
 
     //个人信息页面
