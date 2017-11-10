@@ -37,15 +37,14 @@ public class InvestmentServiceImpl implements IInvestmentService {
             //判断是否符合 每日还本付息 投资项目
             if("daily".equals(interestExpiryDate)&&"t".equals(investmentCompound)){
                 double x = 1 + annualInterestRate/365;
+                if(investmentHorizon==0){
+                    investmentHorizon=1;
+                }
                 double y = investmentHorizon;
                 double totalMoney = Math.pow(x,y)*principal;
                 double totalInterest = totalMoney-principal;
                 interestResultDTO.setTotalInterest(dealWithPoint2(totalInterest));
-                if(investmentHorizon!=0){
-                    interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
-                }else{
-                    interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest));
-                }
+                interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
                 return interestResultDTO;
             }else if("monthly".equals(interestExpiryDate)&&"f".equals(investmentCompound)){
                 //符合 一次性还本付息 投资项目
