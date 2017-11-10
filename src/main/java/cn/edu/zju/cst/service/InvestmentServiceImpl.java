@@ -24,6 +24,9 @@ public class InvestmentServiceImpl implements IInvestmentService {
     private IInvestmentDao investmentDao;
     @Override
     public InterestResultDTO calculateInterest(double principal, double annualInterestRate, int investmentHorizon, String investmentRepayment, String interestExpiryDate, String investmentCompound) {
+        if(investmentHorizon==0){
+            investmentHorizon=1;
+        }
         InterestResultDTO interestResultDTO = new InterestResultDTO();
         //银行活期储蓄平均年利率
         double bankInterestRate = 0.0035;
@@ -37,9 +40,6 @@ public class InvestmentServiceImpl implements IInvestmentService {
             //判断是否符合 每日还本付息 投资项目
             if("daily".equals(interestExpiryDate)&&"t".equals(investmentCompound)){
                 double x = 1 + annualInterestRate/365;
-                if(investmentHorizon==0){
-                    investmentHorizon=1;
-                }
                 double y = investmentHorizon;
                 double totalMoney = Math.pow(x,y)*principal;
                 double totalInterest = totalMoney-principal;
