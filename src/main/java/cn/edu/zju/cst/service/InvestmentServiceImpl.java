@@ -230,6 +230,9 @@ public class InvestmentServiceImpl implements IInvestmentService {
         investmentDetailDTO.setAnnualInterestRate(part2);
         int part3 = investment.getInvestmentHorizon();
         int part4 = part3/30;
+        if(part4==0){
+            part4=60;
+        }
         investmentDetailDTO.setInvestmentHorizon(part4);
         investmentDetailDTO.setMinimumPurchase(investment.getMinimumPurchase());
         investmentDetailDTO.setMaximumPurchase(investment.getMaximumPurchase());
