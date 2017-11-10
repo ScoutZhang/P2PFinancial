@@ -41,7 +41,11 @@ public class InvestmentServiceImpl implements IInvestmentService {
                 double totalMoney = Math.pow(x,y)*principal;
                 double totalInterest = totalMoney-principal;
                 interestResultDTO.setTotalInterest(dealWithPoint2(totalInterest));
-                interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
+                if(investmentHorizon!=0){
+                    interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest/investmentHorizon));
+                }else{
+                    interestResultDTO.setAverageInterest(dealWithPoint2(totalInterest));
+                }
                 return interestResultDTO;
             }else if("monthly".equals(interestExpiryDate)&&"f".equals(investmentCompound)){
                 //符合 一次性还本付息 投资项目
