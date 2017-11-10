@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+import static cn.edu.zju.cst.util.RegularResultDTOUtil.*;
+
 /**
  * Created by jolivan on 2017/11/6.
  */
@@ -61,7 +63,7 @@ public class InvestmentController {
         else if(investmentRepayment.equals("mpmd")) {
             regularResultDTO = investmentService.calculateMpmd(principal,annualInterestRate,investmentHorizon);
         }
-        model.addAttribute("regularResult",regularResultDTO);
+        model.addAttribute("regularResult",convertToSecondModel(regularResultDTO));
 
         InterestResultDTO interestResultDTO = investmentService.calculateInterest(principal, annualInterestRate, investmentHorizon, investmentRepayment, interestExpiryDate, investmentCompound);
         model.addAttribute("interestResult",interestResultDTO);
