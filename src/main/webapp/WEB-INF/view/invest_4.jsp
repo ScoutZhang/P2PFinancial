@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: chacha
-  Date: 2017/11/6 0006
-  Time: 14:00
+  Date: 2017/11/10 0010
+  Time: 0:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>一次性返还本息</title>
+    <title>等额本息</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -55,7 +55,7 @@
                 "principal": principal,
                 "annualInterestRate": annualInterestRate,
                 "investmentHorizon": investmentHorizon,
-                "investmentRepayment":"rdm",
+                "investmentRepayment":"acpim",
                 "interestExpiryDate":"monthly",
                 "investmentCompound":"f"
             };
@@ -84,10 +84,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" style="margin-top: 1%">
                     <li><a href="/index">首页</a></li>
-                    <li class="active"><a href="/investmentOverview?investNum=1">一次性返还本息</a></li>
+                    <li><a href="/investmentOverview?investNum=1">一次性返还本息</a></li>
                     <li><a href="/investmentDetail?investmentRepayment=rdm&investmentHorizon=0&annualInterestRate=0.037&interestExpiryDate=daily&investmentCompound=t&principal=10000">每日返还本息</a></li>
                     <li><a href="/investmentOverview?investNum=3">等额本金</a></li>
-                    <li><a href="/investmentOverview?investNum=4">等额本息</a></li>
+                    <li class="active"><a href="/investmentOverview?investNum=4">等额本息</a></li>
                     <li><a href="/investmentOverview?investNum=5">按月付息</a></li>
                 </ul>
 
@@ -105,7 +105,7 @@
     </nav>
 </div>
 <div class="parallax-pro">
-    <div class="img-src" style="background-image: url('/static/img/invest_1.png');"></div>
+    <div class="img-src" style="background-image: url('/static/img/index_2.jpg');"></div>
     <div class="container">
         <div class="space-100"></div>
         <div class="space-100"></div>
@@ -114,43 +114,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <div class="card card-user">
-                <div class="text-center">
-                    <h4>
-                        <a><small><i class="fa fa-clock-o" style="margin-right: 2px"></i>1个月</small></a>
-                    </h4>
-                    <hr>
-                    <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">6.2%</p><h5><small>预期年化利率</small></h5>
-                    </div>
-                    <div class="space-30"></div>
-                    <hr>
-                    <div class="actions">
-                        <a class="btn btn-lg btn-warning btn-fill" href="/investmentDetail?investmentRepayment=rdm&investmentHorizon=30&annualInterestRate=0.062&interestExpiryDate=monthly&investmentCompound=f&principal=10000">查看详情</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card card-user">
-                <div class="text-center">
-                    <h4>
-                        <a><small><i class="fa fa-clock-o" style="margin-right: 2px"></i>3个月</small></a>
-                    </h4>
-                    <hr>
-                    <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">6.8%</p><h5><small>预期年化利率</small></h5>
-                    </div>
-                    <div class="space-30"></div>
-                    <hr>
-                    <div class="actions">
-                        <a class="btn btn-lg btn-warning btn-fill" href="/investmentDetail?investmentRepayment=rdm&investmentHorizon=90&annualInterestRate=0.068&interestExpiryDate=monthly&investmentCompound=f&principal=10000">查看详情</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="card card-user">
                 <div class="text-center">
                     <h4>
@@ -158,17 +122,17 @@
                     </h4>
                     <hr>
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">7.8%</p><h5><small>预期年化利率</small></h5>
+                        <p class="h1" style="color: #ec971f;">10.7%</p><h5><small>预期年化利率</small></h5>
                     </div>
                     <div class="space-30"></div>
                     <hr>
                     <div class="actions">
-                        <a class="btn btn-lg btn-warning btn-fill" href="/investmentDetail?investmentRepayment=rdm&investmentHorizon=180&annualInterestRate=0.078&interestExpiryDate=monthly&investmentCompound=f&principal=10000">查看详情</a>
+                        <a class="btn btn-lg btn-warning btn-fill" href="/investmentDetail?investmentRepayment=acpim&investmentHorizon=180&annualInterestRate=0.107&interestExpiryDate=monthly&investmentCompound=f&principal=10000">查看详情</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="card card-user">
                 <div class="text-center">
                     <h4>
@@ -176,12 +140,12 @@
                     </h4>
                     <hr>
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">9.0%</p><h5><small>预期年化利率</small></h5>
+                        <p class="h1" style="color: #ec971f;">11.5%</p><h5><small>预期年化利率</small></h5>
                     </div>
                     <div class="space-30"></div>
                     <hr>
                     <div class="actions">
-                        <a class="btn btn-lg btn-warning btn-fill" href="/investmentDetail?investmentRepayment=rdm&investmentHorizon=360&annualInterestRate=0.09&interestExpiryDate=monthly&investmentCompound=f&principal=10000">查看详情</a>
+                        <a class="btn btn-lg btn-warning btn-fill" href="/investmentDetail?investmentRepayment=acpim&investmentHorizon=360&annualInterestRate=0.115&interestExpiryDate=monthly&investmentCompound=f&principal=10000">查看详情</a>
                     </div>
                 </div>
             </div>
@@ -209,7 +173,7 @@
                                 <input id="investmentHorizon" name="investmentHorizon" type="text" value="" placeholder="请输入您的投资期限" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input name="investmentRepayment" type="hidden" value="rdm" class="form-control">
+                                <input name="investmentRepayment" type="hidden" value="acpim" class="form-control">
                             </div>
                             <div class="form-group">
                                 <input name="interestExpiryDate" type="hidden" value="monthly" class="form-control">

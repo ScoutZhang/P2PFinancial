@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>首页</title>
+    <title>个人信息</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -28,6 +28,14 @@
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 
     <script type="text/javascript">
+        function init(){
+            if('<%=session.getAttribute("extractResult")%>'!="null"){
+                var msg = '<%=session.getAttribute("extractResult")%>';
+                alert(msg);
+                <%session.removeAttribute("extractResult");%>
+            }
+        }
+
         function out() {
             var msa = "您确认退出吗？\n\n请确认！";
             if (confirm(msa) == true) {
@@ -36,9 +44,18 @@
                 return false;
             }
         }
+
+        function extractMoney() {
+            var msa = "您确认提取本息吗？\n\n请确认！";
+            if (confirm(msa) == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
 </head>
-<body>
+<body onload="init()">
 <div id="navbar">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -103,10 +120,10 @@
             <br><br>
             <div class="row" style="margin-right: 10%">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-block btn-lg btn-fill btn-round btn-warning">充值</button>
+                    <button onclick="window.location.href='/testDayByDay'" type="button" class="btn btn-block btn-lg btn-fill btn-round btn-warning">充值</button>
                 </div>
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-block btn-lg btn-round btn-warning">提现</button>
+                    <button type="button" class="btn btn-block btn-lg btn-round btn-warning">提现</button>
                 </div>
             </div>
         </div>
@@ -122,12 +139,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="text-center">
-                            <h5><small>目前在投金额</small></h5><p class="h2" style="color: #ec971f;">${userAccount.lockMoney}<a class="h5">&emsp;元</a></p>
+                            <h5><small>目前在投金额</small></h5><p class="h4" style="color: #ec971f;">${userAccount.lockMoney}<a class="h5">&emsp;元</a></p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="text-center">
-                            <h5><small>目前可提金额</small></h5><p class="h2" style="color: #ec971f;">${userAccount.money}<a class="h5">&emsp;元</a></p>
+                            <h5><small>目前可提金额</small></h5><p class="h4" style="color: #ec971f;">${userAccount.money}<a class="h5">&emsp;元</a></p>
                         </div>
                     </div>
                 </div>
@@ -173,7 +190,7 @@
                                                 <td>${userInverstment.lockInterest}</td>
                                                 <td>${userInverstment.principal}</td>
                                                 <td>${userInverstment.interest}</td>
-                                                <td><button type="submit" class="btn btn-block btn-sm btn-round btn-warning" style="margin-top: 1%;">提取本息</button></td>
+                                                <td><button onclick="return extractMoney(),window.location.href='/extractMoney?userInvestmentId='+${userInverstment.userInvestmentId};" type="button" class="btn btn-block btn-sm btn-round btn-warning" style="margin-top: 1%;">提取本息</button></td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>

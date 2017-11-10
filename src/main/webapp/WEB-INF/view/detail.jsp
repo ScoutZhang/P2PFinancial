@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: chacha
@@ -25,8 +26,27 @@
 
     <link href="/static/bootstrap3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript">
+        function init(){
+            if('<%=session.getAttribute("investmentResult")%>'!="null"){
+                var msg = '<%=session.getAttribute("investmentResult")%>';
+                alert(msg);
+                <%session.removeAttribute("investmentResult");%>
+            }
+        }
+
+        function invest() {
+            var msa = "您确认进行投资吗？\n\n请确认！";
+            if (confirm(msa) == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </head>
-<body>
+<body onload="init()">
 <div id="navbar">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -73,27 +93,36 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">8.8%</p><h5><small>预期年化利率</small></h5>
+                        <p class="h1" style="color: #ec971f;">${investmentDetail.annualInterestRate}</p><h5><small>预期年化利率</small></h5>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="text-center">
-                        <p class="h1" style="color: #ec971f;">1个月</p><h5><small>投资期限</small></h5>
+                        <p class="h1" style="color: #ec971f;">${investmentDetail.investmentHorizon}个月</p><h5><small>投资期限</small></h5>
                     </div>
                 </div>
             </div>
             <br>
             <div class="tab-pane active" id="inverst" style="margin-left: 7%;margin-right: 5%;">
-                <form>
+                <form action="/setNewInvestment" method="post">
                     <div class="form-group" style="width: 80%;margin-left: 10%;">
-                        <input id="invest_prin" type="text" value="" placeholder="请输入您的投资金额" class="form-control">
+                        <input name="principal" type="text" value="" placeholder="请输入您的投资金额" class="form-control">
                     </div>
+                    <div class="form-group" style="width: 80%;margin-left: 10%;">
+                        <input name="investmentId" type="hidden" value=${investmentDetail.investmentId} class="form-control">
+                    </div>
+                    <%if(session.getAttribute("user")==null){%>
                     <div class="text-center" style="width: 50%;margin-left: 25%;">
-                        <button type="submit" class="btn btn-block btn-lg btn-fill btn-round btn-warning">一键投资</button>
+                        <button onclick="window.location.href='/login';" type="button" class="btn btn-block btn-lg btn-fill btn-round btn-warning">一键投资</button>
                     </div>
+                    <%}else{%>
+                    <div class="text-center" style="width: 50%;margin-left: 25%;">
+                        <button onclick="return invest()" type="submit" class="btn btn-block btn-lg btn-fill btn-round btn-warning">一键投资</button>
+                    </div>
+                    <%}%>
                     <br>
                     <div class="text-center">
-                        <h5><small>加入下限：1000&emsp;&emsp;加入上限：100000</small></h5>
+                        <h5><small>加入下限：${investmentDetail.minimumPurchase}&emsp;&emsp;加入上限：${investmentDetail.maximumPurchase}</small></h5>
                     </div>
                 </form>
             </div>
@@ -103,47 +132,44 @@
         </div>
         <div class="col-md-4">
             <div class="text-center" style="margin-top: 20%;">
-                <h5><small>已累计招募</small></h5><p style="color: #ec971f;font-size: 500%">10000<a class="h5">&emsp;人</a></p>
+                <h5><small>已累计招募</small></h5><p style="color: #ec971f;font-size: 500%">${investmentDetail.numberOfPeopleAdded}<a class="h5">&emsp;人</a></p>
             </div>
         </div>
     </div>
 </div>
 <hr>
 <div class="container">
-    <div class="tim-title" style="margin-left: 18%;">
-        <h3>项目预期收益计算</h3>
-    </div>
     <div class="row">
         <div class="col-md-8">
-            <div class="tab-pane active" id="calculator" style="margin-left: 7%;margin-right: 5%;">
-                <form>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-group" style="margin-top: 15%;">
-                                <input id="principal" type="text" value="" placeholder="请输入您的本金" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input id="rate" type="hidden" value="8.8%" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input id="term" type="hidden" value="1" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3" style="margin-top: 9%;">
-                            <div class="text-left">
-                                <button type="submit" class="btn btn-block btn-lg btn-fill btn-round btn-warning">计算</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+            <div class="tim-title text-center" style="margin-top: 8%;margin-right: 10%;">
+                <h3>项目预期收益计算</h3>
             </div>
         </div>
         <div class="col-md-4">
             <div class="text-center">
-                <h5><small>总收益：</small></h5><p style="color: #ec971f;font-size: 500%;">0000.00</p>
+                <h5><small>本金一万元总收益：</small></h5><p style="color: #ec971f;font-size: 500%;">${interestResult.totalInterest}</p>
             </div>
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                <h5><small>平均每日收益</small></h5><p id="averageInterest" class="h2" style="color: #ec971f;">${interestResult.averageInterest}<a class="h5">&emsp;元</a></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center">
+                <h5><small>银行活期收益</small></h5><p id="depositBankInterest" class="h2" style="color: #ec971f;">${interestResult.depositBankInterest}<a class="h5">&emsp;元</a></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center">
+                <h5><small>余额宝收益</small></h5><p id="yuebaoInterest" class="h2" style="color: #ec971f;">${interestResult.yuebaoInterest}<a class="h5">&emsp;元</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="space-30"></div>
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -152,48 +178,24 @@
                         <div class="content table-responsive table-full-width">
                             <table class="table table-striped">
                                 <thead>
-                                <tr><th>预计汇款时间</th>
+                                <tr><th>预计回款时间</th>
                                     <th>回款本金</th>
                                     <th>回款利息</th>
                                     <th>回款总额</th>
                                 </tr></thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Minerva Hooper</td>
-                                    <td>$23,789</td>
-                                    <td>Curaçao</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Sage Rodriguez</td>
-                                    <td>$56,142</td>
-                                    <td>Netherlands</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Philip Chaney</td>
-                                    <td>$38,735</td>
-                                    <td>Korea, South</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Doris Greene</td>
-                                    <td>$63,542</td>
-                                    <td>Malawi</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Mason Porter</td>
-                                    <td>$78,615</td>
-                                    <td>Chile</td>
-                                </tr>
+                                <c:choose>
+                                    <c:when test="${!empty regularResult}">
+                                        <c:forEach var="regularResultDTO" items="${regularResult}">
+                                            <tr>
+                                                <td>${regularResultDTO.returnMoneyTime}</td>
+                                                <td>${regularResultDTO.returnPrincipal}</td>
+                                                <td>${regularResultDTO.returnInterest}</td>
+                                                <td>${regularResultDTO.returnMoney}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                </c:choose>
                                 </tbody>
                             </table>
                         </div>
@@ -218,28 +220,40 @@
                         <table class="table table-striped">
                             <tbody>
                             <tr>
-                                <td><p class="h6" style="color: #ec971f;">名称</p></td>
-                                <td>内容</td>
+                                <td>项目名称</td>
+                                <td>${investmentDetail.investmentName}</td>
                             </tr>
                             <tr>
-                                <td><p class="h6" style="color: #ec971f;">名称</p></td>
-                                <td>内容</td>
+                                <td>项目介绍</td>
+                                <td>${investmentDetail.investmentIntroduction}</td>
                             </tr>
                             <tr>
-                                <td><p class="h6" style="color: #ec971f;">名称</p></td>
-                                <td>内容</td>
+                                <td>年化利率（百分比形式）</td>
+                                <td>${investmentDetail.annualInterestRate}</td>
                             </tr>
                             <tr>
-                                <td><p class="h6" style="color: #ec971f;">名称</p></td>
-                                <td>内容</td>
+                                <td>投资期限（月）</td>
+                                <td>${investmentDetail.investmentHorizon}</td>
                             </tr>
                             <tr>
-                                <td><p class="h6" style="color: #ec971f;">名称</p></td>
-                                <td>内容</td>
+                                <td>最低起购金额</td>
+                                <td>${investmentDetail.minimumPurchase}</td>
                             </tr>
                             <tr>
-                                <td><p class="h6" style="color: #ec971f;">名称</p></td>
-                                <td>内容</td>
+                                <td>最大购买额度</td>
+                                <td>${investmentDetail.maximumPurchase}</td>
+                            </tr>
+                            <tr>
+                                <td>计息方式</td>
+                                <td>${investmentDetail.interestExpiryDate}</td>
+                            </tr>
+                            <tr>
+                                <td>复利情况</td>
+                                <td>${investmentDetail.investmentCompound}</td>
+                            </tr>
+                            <tr>
+                                <td>累计参与该项目的人次</td>
+                                <td>${investmentDetail.numberOfPeopleAdded}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -250,22 +264,40 @@
                         <table class="table table-striped">
                             <tbody>
                             <tr>
-                                <td>1</td>
+                                <td>Q1：U计划安全吗？</td>
                             </tr>
                             <tr>
-                                <td>2</td>
+                                <td>人人贷以严谨负责的态度对每笔借款进行严格筛选，同时具备专业的贷后管理团队和高效的催收流程，最大限度的保护投资者的权益。</td>
                             </tr>
                             <tr>
-                                <td>3</td>
+                                <td>Q2：U计划发布时间？</td>
                             </tr>
                             <tr>
-                                <td>4</td>
+                                <td>U计划主要有5种， U计划A锁定期3个月，U计划B锁定期6个月，U计划C类别有3种不同长度锁定期，不同锁定期长度的U计划预期年化利率不同，具体以当期U计划公布的预期年化利率为准。</td>
                             </tr>
                             <tr>
-                                <td>5</td>
+                                <td>Q3：U计划预期利率有多少？</td>
                             </tr>
                             <tr>
-                                <td>6</td>
+                                <td>U计划主要有5种， U计划A锁定期3个月，U计划B锁定期6个月，U计划C类别有3种不同长度锁定期，不同锁定期长度的U计划预期年化利率不同，具体以当期U计划公布的预期年化利率为准。</td>
+                            </tr>
+                            <tr>
+                                <td>Q4：U计划收益处理方式是什么？</td>
+                            </tr>
+                            <tr>
+                                <td>U计划提供以下两种出借所获利息收益处理方式：再出借，或由用户自行支配。用户在加入U计划时可进行选择，暂不支持中途修改。</td>
+                            </tr>
+                            <tr>
+                                <td>Q5：锁定期是什么？</td>
+                            </tr>
+                            <tr>
+                                <td>U计划有锁定期限制，锁定期内，您可操作提前退出，但会产生相应费用，提前退出费用=加入计划金额*2.0%。锁定期满后自动退出U计划，系统通过转让届时U计划所投债权标的实现您投资资金的回收。</td>
+                            </tr>
+                            <tr>
+                                <td>Q6：U计划到期后，我如何退出并实现收益？</td>
+                            </tr>
+                            <tr>
+                                <td>U计划到期当日，系统将自动通过债权转让为您收回出借本金，转让完成时间一般为1~3个工作日。</td>
                             </tr>
                             </tbody>
                         </table>
@@ -273,6 +305,7 @@
                 </div>
             </div>
         </div>
+            <div class="space-30"></div>
     </div>
 </div>
 
