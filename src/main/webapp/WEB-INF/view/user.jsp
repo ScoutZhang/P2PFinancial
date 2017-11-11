@@ -82,7 +82,7 @@
                 <ul class="nav navbar-nav" style="margin-top: 1%">
                     <li><a href="/index">首页</a></li>
                     <li><a href="/investmentOverview?investNum=1">一次性返还本息</a></li>
-                    <li><a href="/invest">每日返还本息</a></li>
+                    <li><a href="/investmentDetail?investmentRepayment=rdm&investmentHorizon=0&annualInterestRate=0.037&interestExpiryDate=daily&investmentCompound=t&principal=10000">每日返还本息</a></li>
                     <li><a href="/investmentOverview?investNum=3">等额本金</a></li>
                     <li><a href="/investmentOverview?investNum=4">等额本息</a></li>
                     <li><a href="/investmentOverview?investNum=5">按月付息</a></li>

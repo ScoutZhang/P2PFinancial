@@ -60,7 +60,7 @@
                 <ul class="nav navbar-nav" style="margin-top: 1%">
                     <li class="active"><a href="/index">首页</a></li>
                     <li><a href="/investmentOverview?investNum=1">一次性返还本息</a></li>
-                    <li><a href="/invest">每日返还本息</a></li>
+                    <li><a href="/investmentDetail?investmentRepayment=rdm&investmentHorizon=0&annualInterestRate=0.037&interestExpiryDate=daily&investmentCompound=t&principal=10000">每日返还本息</a></li>
                     <li><a href="/investmentOverview?investNum=3">等额本金</a></li>
                     <li><a href="/investmentOverview?investNum=4">等额本息</a></li>
                     <li><a href="/investmentOverview?investNum=5">按月付息</a></li>
@@ -256,40 +256,34 @@
                         <table class="table table-striped">
                             <tbody>
                             <tr>
-                                <td>Q1：U计划安全吗？</td>
+                                <td>Q1：该投资计划安全吗？</td>
                             </tr>
                             <tr>
-                                <td>人人贷以严谨负责的态度对每笔借款进行严格筛选，同时具备专业的贷后管理团队和高效的催收流程，最大限度的保护投资者的权益。</td>
+                                <td>悦悦贷以严谨负责的态度对每笔借款进行严格筛选，同时具备专业的贷后管理团队和高效的催收流程，最大限度的保护投资者的权益。</td>
                             </tr>
                             <tr>
-                                <td>Q2：U计划发布时间？</td>
+                                <td>Q2：不同投资期限有什么区别？</td>
                             </tr>
                             <tr>
-                                <td>U计划主要有5种， U计划A锁定期3个月，U计划B锁定期6个月，U计划C类别有3种不同长度锁定期，不同锁定期长度的U计划预期年化利率不同，具体以当期U计划公布的预期年化利率为准。</td>
+                                <td>投资期限即资金锁定期，不同锁定期长度的投资计划预期年化利率不同，具体以当期投资计划公布的预期年化利率为准。</td>
                             </tr>
                             <tr>
-                                <td>Q3：U计划预期利率有多少？</td>
+                                <td>Q3：投资计划收益处理方式是什么？</td>
                             </tr>
                             <tr>
-                                <td>U计划主要有5种， U计划A锁定期3个月，U计划B锁定期6个月，U计划C类别有3种不同长度锁定期，不同锁定期长度的U计划预期年化利率不同，具体以当期U计划公布的预期年化利率为准。</td>
+                                <td>投资计划提供以下两种出借所获利息收益处理方式：再出借，或由用户自行支配。用户在加入计划时可进行选择，暂不支持中途修改。</td>
                             </tr>
                             <tr>
-                                <td>Q4：U计划收益处理方式是什么？</td>
+                                <td>Q4：锁定期是什么？</td>
                             </tr>
                             <tr>
-                                <td>U计划提供以下两种出借所获利息收益处理方式：再出借，或由用户自行支配。用户在加入U计划时可进行选择，暂不支持中途修改。</td>
+                                <td>投资计划有锁定期限制，锁定期内，不可操作提前退出，锁定期满后自动退出投资计划，系统通过转让届时投资计划所投债权标的实现您投资资金的回收。</td>
                             </tr>
                             <tr>
-                                <td>Q5：锁定期是什么？</td>
+                                <td>Q5：投资计划到期后，我如何退出并实现收益？</td>
                             </tr>
                             <tr>
-                                <td>U计划有锁定期限制，锁定期内，您可操作提前退出，但会产生相应费用，提前退出费用=加入计划金额*2.0%。锁定期满后自动退出U计划，系统通过转让届时U计划所投债权标的实现您投资资金的回收。</td>
-                            </tr>
-                            <tr>
-                                <td>Q6：U计划到期后，我如何退出并实现收益？</td>
-                            </tr>
-                            <tr>
-                                <td>U计划到期当日，系统将自动通过债权转让为您收回出借本金，转让完成时间一般为1~3个工作日。</td>
+                                <td>投资计划到期当日，系统将自动通过债权转让为您收回出借本金，转让完成时间一般为1~3个工作日。</td>
                             </tr>
                             </tbody>
                         </table>
